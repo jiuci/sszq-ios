@@ -163,19 +163,3 @@
 
 @end
 
-@implementation UITableView (refresh)
-
-- (void)endRefresh
-{
-    if (self.isHeaderRefreshing) {
-        [self headerEndRefreshing];
-    }
-
-    if (self.isFooterRefreshing) {
-        [self footerEndRefreshing];
-    }
-
-    [self endLoading];
-}
-
-@end

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="epg-cx-aVq" customClass="BYMineHeaderView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_usercenter" translatesAutoresizingMaskIntoConstraints="NO" id="OP8-n6-2sf">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="164"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_headphoto" translatesAutoresizingMaskIntoConstraints="NO" id="2y3-Wl-uIV">
                     <rect key="frame" x="125" y="14" width="70" height="70"/>
@@ -33,27 +33,10 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ca7-a2-3OT" userLabel="order_Status_View">
                     <rect key="frame" x="0.0" y="120" width="320" height="44"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_usercenter_trans_orderstatus" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-ME-tfs">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="qkN-Eh-3RV"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="4pG-ME-tfs" firstAttribute="leading" secondItem="Ca7-a2-3OT" secondAttribute="leading" id="2gF-Ou-rfy"/>
-                        <constraint firstItem="4pG-ME-tfs" firstAttribute="top" secondItem="Ca7-a2-3OT" secondAttribute="top" constant="18" id="B4I-il-DWu"/>
                         <constraint firstAttribute="height" constant="44" id="QMM-m0-u7v"/>
-                        <constraint firstAttribute="trailing" secondItem="4pG-ME-tfs" secondAttribute="trailing" id="Yat-U7-2T5"/>
-                        <constraint firstAttribute="bottom" secondItem="4pG-ME-tfs" secondAttribute="bottom" id="phX-uS-fcn"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="B4I-il-DWu"/>
-                        </mask>
-                    </variation>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShA-0U-MVt">
                     <rect key="frame" x="60" y="94" width="200" height="20"/>
@@ -103,6 +86,10 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="Ca7-a2-3OT"/>
+                    <exclude reference="ShA-0U-MVt"/>
+                </mask>
                 <mask key="constraints">
                     <exclude reference="5L1-Z3-yvx"/>
                     <exclude reference="j68-UU-uIC"/>
@@ -113,15 +100,13 @@
                 <outlet property="loginView" destination="vk1-LJ-QMj" id="Q81-ET-o82"/>
                 <outlet property="orderStatusView" destination="Ca7-a2-3OT" id="TsG-pB-NNK"/>
                 <outlet property="userIcon" destination="1IK-8a-q13" id="K6p-Y1-ov1"/>
-                <outlet property="userName" destination="ShA-0U-MVt" id="7vC-9o-R3d"/>
             </connections>
-            <point key="canvasLocation" x="281" y="303"/>
+            <point key="canvasLocation" x="281" y="290"/>
         </view>
     </objects>
     <resources>
         <image name="bg_headphoto" width="70" height="70"/>
         <image name="bg_usercenter" width="320" height="164"/>
-        <image name="bg_usercenter_trans_orderstatus" width="12" height="12"/>
         <image name="icon_user_default" width="60" height="60"/>
     </resources>
 </document>

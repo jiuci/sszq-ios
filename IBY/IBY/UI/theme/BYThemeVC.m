@@ -11,8 +11,8 @@
 #import "BYThemeInfo.h"
 #import "BYImageView.h"
 #import "BYPoolNetworkView.h"
-#import "MJRefresh.h"
-#import "MJRefreshHeaderView.h"
+//#import "MJRefresh.h"
+//#import "MJRefreshHeaderView.h"
 #import "UIViewController+analysis.h"
 
 @interface BYThemeVC ()<UIScrollViewDelegate>
@@ -81,17 +81,6 @@
     [_gototop setBackgroundImage:[UIImage imageNamed:@"icon_theme_gototop"] forState:UIControlStateNormal];
     _gototop.hidden = YES;
     _gototop.alpha = 0;
-    __weak BYThemeVC * wself = self;
-    [self.scroll addHeaderWithCallback:^{
-        [wself refresh];
-    }];
-    
-    for (UIView* view in self.scroll.subviews) {
-        if (![view.class isSubclassOfClass:[MJRefreshHeaderView class]]) {
-            continue;
-        }
-        ((MJRefreshHeaderView*)view).showTimeLabel = NO;
-    }
     
 }
 
@@ -104,10 +93,6 @@
     }
     [_scroll setContentOffset:CGPointMake(0, 0) animated:NO];
     _gototop.hidden = YES;
-    __weak typeof(self) wself = self;
-    [self.scroll addHeaderWithCallback:^{
-        [wself refresh];
-    }];
     BYHomeInfoSimple * simple = _info.headerInfo;
 //    NSLog(@"%d,%d",simple.width,simple.height);
     if (simple.width > 0 && simple.height > 0) {
@@ -240,14 +225,14 @@
                 [wself.tipsView addSubview:tapRefresh];
                 [tapRefresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
             }
-            [wself.scroll headerEndRefreshing];
+//            [wself.scroll headerEndRefreshing];
             alertError(error);
             return;
         }
         [wself hideTipsView];
         if ([wself.info isSameTo:info]) {
             wself.title = info.title;
-            [wself.scroll headerEndRefreshing];
+//            [wself.scroll headerEndRefreshing];
             return;
         }
         wself.info = info;
@@ -255,7 +240,7 @@
         wself.pageParameter = [NSMutableDictionary dictionaryWithObject:str forKey:@"mid"];
         [wself updateUI];
 //        NSLog(@"update");
-        [wself.scroll headerEndRefreshing];
+//        [wself.scroll headerEndRefreshing];
     }];
 }
 
@@ -264,10 +249,10 @@
     for (UIView * view in _scroll.subviews) {
         [view removeFromSuperview];
     }
-    __weak typeof(self) wself = self;
-    [self.scroll addHeaderWithCallback:^{
-        [wself refresh];
-    }];
+//    __weak typeof(self) wself = self;
+//    [self.scroll addHeaderWithCallback:^{
+//        [wself refresh];
+//    }];
     self.info = nil;
 
 }

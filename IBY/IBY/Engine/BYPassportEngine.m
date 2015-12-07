@@ -16,9 +16,10 @@
 + (void)loginByUser:(NSString*)user
                 pwd:(NSString*)pwd
              finish:(void (^)(BYUser* user, BYError* error))finished{
-    NSString* url = @"/user/customer/login";
+    NSString* url = SSZQAPI_USER_LGOIN;
     NSDictionary* params = @{ @"username" : user,
-                              @"epassword" : [pwd encryptstr]
+//                              @"epassword" : [pwd encryptstr]
+                              @"password" : pwd
                               };
     [BYNetwork post:url params:params finish:^(NSDictionary* data, BYError* error) {
         if (data && !error) {
@@ -60,9 +61,10 @@
             verycode:(NSString*)code
                finsh:(void (^)(BOOL success, BYError* error))finished
 {
-    NSString* url = @"user/customer/CustomerRegisterServlet";
+    NSString* url = SSZQAPI_USER_CUSTOMERREGISTERSERVLET;
     NSDictionary* params = @{ @"username" : user,
-                              @"epassword" : [pwd encryptstr],
+//                              @"epassword" : [pwd encryptstr],
+                              @"password" : pwd,
                               @"verycode" : code
                               } ;
     [BYNetwork post:url params:params finish:^(NSDictionary* data, BYError* error) {
@@ -80,7 +82,7 @@
                          md5:(NSString*)md5
                       finish:(void (^)(BOOL success, BYError* error))finished;
 {
-    NSString* url = @"user/customer/UpdatePassword";
+    NSString* url = SSZQAPI_USER_UPDATEPASSWORD;
     
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     [params safeSetValue:username forKey:@"username"];

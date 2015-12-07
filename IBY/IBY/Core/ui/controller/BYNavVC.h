@@ -12,8 +12,15 @@
 
 @property (nonatomic, strong) UIViewController* rootController;
 
+
 + (instancetype)nav:(UIViewController*)viewController title:(NSString*)title;
 
+
+
 - (UIViewController*)currentVC;
+
+// 顺手赚钱
+- (BOOL)viewControllersExistVC:(Class)vcClass WithVCs:(NSArray *)vcs;
+
 
 @end

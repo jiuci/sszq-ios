@@ -27,7 +27,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleVersion</key>
-	<string>2.2.6</string>
+	<string>1.0.2</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -47,7 +47,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.6</string>
+	<string>1.0.2</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -55,12 +55,12 @@
 	</dict>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -98,8 +98,7 @@
 			<string>com.weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx3c092c9323937832</string>
-				<string>wxa0286879d34677b0</string>
+				<string>wx8d87ece5a0981829</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -108,25 +107,23 @@
 			<key>CFBundleURLName</key>
 			<string>com.tencent</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>tencent1103434454</string>
-			</array>
+			<array/>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.biyao.fu</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>${PRODUCT_NAME}</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 </dict>

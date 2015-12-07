@@ -169,12 +169,15 @@
 - (NSDictionary*)parseURLParams
 {
     NSString* query = [self copy];
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    NSString *url = [query substringFromIndex:4];
+    [params setObject:url forKey:@"url"];
+
     NSRange range = [query rangeOfString:@"?"];
     if (range.length > 0) {
         query = [query substringFromIndex:range.location + 1];
     }
     NSArray* pairs = [query componentsSeparatedByString:@"&"];
-    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     for (NSString* pair in pairs) {
         NSArray* kv = [pair componentsSeparatedByString:@"="];
         if ([kv isKindOfClass:[NSArray class]] && kv.count == 2) {

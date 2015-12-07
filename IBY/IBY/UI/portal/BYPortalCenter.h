@@ -24,4 +24,6 @@ typedef enum {
 - (void)portTo:(BYPortal)portalPage;
 - (void)portTo:(BYPortal)portalPage params:(NSDictionary*)params;
 
+- (void)portToPushUrlWithParams:(NSDictionary *)params;
+
 @end

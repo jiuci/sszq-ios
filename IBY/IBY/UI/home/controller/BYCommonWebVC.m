@@ -17,7 +17,7 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 
-#import "BYCaptureController.h"
+//#import "BYCaptureController.h"
 
 #import "BYLoginVC.h"
 #import "BYMineVC.h"
@@ -226,6 +226,12 @@
         _currentUrl = requestString;
         return YES;
     }
+    
+#warning SSZQ-TEST ----------------
+    // 下面两行直接放行，不进行判断
+//    _currentUrl = requestString;
+//    return YES;
+    
 //    [iConsole log:@"mark2"];
     //对我们自己的地址进行分类处理
 //    NSLog(@"%@",requestString);
@@ -586,7 +592,7 @@
                                    [wself.webView loadRequest:[NSURLRequest requestWithURL:url]];
                                }];
 
-        UIButton* btn3 = [BYBarButton barBtnWithIcon:@"icon_mine" hlIcon:@"icon_mine" title:@"我的必要"];
+        UIButton* btn3 = [BYBarButton barBtnWithIcon:@"icon_mine" hlIcon:@"icon_mine" title:@"个人中心"];
         [btn3 setTitleColor:BYColorb768 forState:UIControlStateHighlighted];
         [_mutiSwitch addButtonWithBtn:btn3
                                handle:^(id sender) {
@@ -729,7 +735,7 @@
 + (instancetype)barBtnWithIcon:(NSString*)normalIcon hlIcon:(NSString*)hlIcon title:(NSString*)title
 {
     BYBarButton* btn = [[self alloc] init];
-    btn.frame = BYRectMake(0, 0, SCREEN_WIDTH / 3, 46);
+    btn.frame = BYRectMake(0, 0, SCREEN_WIDTH / 4, 46);
 
     UIImageView* icon = [[UIImageView alloc] initWithFrame:BYRectMake(0, 6, 16, 16)];
     icon.centerX = btn.width / 2;
@@ -757,12 +763,12 @@
     _sublabel.highlighted = selected;
 }
 
-- (void)setHighlighted:(BOOL)highlighted
-{
-    [super setHighlighted:highlighted];
-    _iconView.highlighted = highlighted;
-    _sublabel.highlighted = highlighted;
-}
+//- (void)setHighlighted:(BOOL)highlighted
+//{
+//    [super setHighlighted:highlighted];
+//    _iconView.highlighted = highlighted;
+//    _sublabel.highlighted = highlighted;
+//}
 
 @end
 void JumpToWebBlk(NSString*url,BYJumpWebFinish blk)

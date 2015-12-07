@@ -19,7 +19,7 @@
 //weixin
 - (NSString*)weixinClientKey
 {
-    return @"wxa0286879d34677b0";
+    return @"wx8d87ece5a0981829";
 }
 
 //qqweibo

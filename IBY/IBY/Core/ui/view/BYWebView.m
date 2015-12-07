@@ -21,7 +21,7 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "BYIMViewController.h"
-#import "BYCaptureController.h"
+//#import "BYCaptureController.h"
 
 @interface BYWebView ()
 
@@ -108,12 +108,12 @@
             }
         }break;
         case BYH5TypeGlassWearing:{
-            if (self.h5Params[@"designId"]) {
-                [BYCaptureController sharedGlassesController].designId = [self.h5Params[@"designId"] intValue];
-                BYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-                BYHomeVC* homeVC = appDelegate.homeVC;
-                [[BYCaptureController sharedGlassesController]goGlassWearingFromVC:homeVC];
-            }
+//            if (self.h5Params[@"designId"]) {
+//                [BYCaptureController sharedGlassesController].designId = [self.h5Params[@"designId"] intValue];
+//                BYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//                BYHomeVC* homeVC = appDelegate.homeVC;
+//                [[BYCaptureController sharedGlassesController]goGlassWearingFromVC:homeVC];
+//            }
 
         }break;
         case BYH5TypeBlankGoback:{

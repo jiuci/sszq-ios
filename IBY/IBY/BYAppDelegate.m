@@ -14,11 +14,11 @@
 #import "SAKShareEngine.h"
 #import "BYShareConfig.h"
 
-#import "BYPayCenter.h"
+//#import "BYPayCenter.h"
 #import <TencentOpenAPI/TencentOAuth.h>
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
-#import "WeiboSDK.h"
+//#import "WeiboSDK.h"
 
 #import "BYPushCenter.h"
 #import "BYWelcomeVC.h"
@@ -26,8 +26,8 @@
 #import "BYHomeVC.h"
 #import "BYLoginVC.h"
 #import "BYLoginService.h"
-#import "BYLeftMenuViewController.h"
-#import "RESideMenu.h"
+//#import "BYLeftMenuViewController.h"
+//#import "RESideMenu.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -36,10 +36,20 @@
 
 #import <EaseMobSDK/EaseMob.h>
 
+#import "APService.h"
 
-@interface BYAppDelegate () <WXApiDelegate, WeiboSDKDelegate,TencentSessionDelegate,RESideMenuDelegate>
+
+
+@interface BYAppDelegate () <WXApiDelegate,TencentSessionDelegate>
+
+
+@property (nonatomic, strong) UIWindow *window1;
+@property (nonatomic, strong) UIWindow *window2;
+@property (nonatomic, strong) UIWindow *window3;
 
 @property (nonatomic, strong) BYWelcomeVC* welcomeVC;
+
+
 
 @end
 
@@ -62,70 +72,78 @@
     [BYAnalysis logEvent:@"App通用事件" action:@"启动" desc:nil];
     
     [self registerShareSdk];
-    [WXApi registerApp:@"wxa0286879d34677b0"];
+    [WXApi registerApp:@"wx8d87ece5a0981829"];
+    /*
+     必要ios （废弃）
+     AppID：wx3c092c9323937832
+     AppSecret：e879598afcc57cd77e83393c40d27424
+     必要     (必要正式使用)
+     AppID：wxa0286879d34677b0
+     AppSecret：8c48307ca142b5929e0624bdd17dbc0e
+     必要顺手赚钱 （顺手赚钱正式使用）
+     AppID：wx8d87ece5a0981829
+     AppSecret：d4624c36b6795d1d99dcf0547af5443d
+     */
+    
 
     _homeVC = [[BYHomeVC alloc] init];
-    _homeNav = [BYNavVC nav:_homeVC title:@"必要商城"];
-    BYLeftMenuViewController *leftMenuViewController = [[BYLeftMenuViewController alloc] init];
-    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:_homeNav
-                                                                    leftMenuViewController:leftMenuViewController];
-    sideMenuViewController.delegate = self;
+    _homeNav = [BYNavVC nav:_homeVC title:@"顺手赚钱"];
+//    BYLeftMenuViewController *leftMenuViewController = [[BYLeftMenuViewController alloc] init];
+//    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:_homeNav
+//                                                                    leftMenuViewController:leftMenuViewController];
+//    sideMenuViewController.delegate = self;
     //张
     
-    self.reSideMenu = sideMenuViewController;
+//    self.reSideMenu = sideMenuViewController;
     
-    _window.rootViewController = self.reSideMenu;
+//    _window.rootViewController = self.reSideMenu;
+    
+    _window.rootViewController = _homeNav;
     [_window makeKeyAndVisible];
 
-    [self showWelcomeVC];
+    // 首次启动欢迎页
+//    [self showWelcomeVC];
 
-    //    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
-    //        // iOS 8 Notifications
-    //        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)categories:nil]];
-    //        [application registerForRemoteNotifications];
-    //    }
-    //    else {
-    //        // iOS < 8 Notifications
-    //        [application registerForRemoteNotificationTypes:
-    //                         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    //    }
-
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
-        // iOS 8 Notifications
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else {
-        // iOS < 8 Notifications
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-                                               (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
-    }
+    
     [BYMonitorService startMonitoring];
     
     
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"biyao-tech#biyao" apnsCertName:nil];
-    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+//    [[EaseMob sharedInstance] registerSDKWithAppKey:@"biyao-tech#biyao" apnsCertName:nil];
+//    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     CLLocationManager* location = [CLLocationManager new];
     if ([location respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [location requestWhenInUseAuthorization];
     }
     
+    
+    /*
+     以下代码注释原因: APNs注册和JPush注册重复，如若不注释，每次通知(费锁频)都会连续响两次(相隔不到0.5秒)，但实际只是一次通知
+     */
+
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"com.biyao.push.token"]);
-#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    if (IS_OS_8_OR_LATER) {
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    } else {
-        [application registerForRemoteNotificationTypes:
-         UIRemoteNotificationTypeBadge |
-         UIRemoteNotificationTypeAlert |
-         UIRemoteNotificationTypeSound];
-    }
+//#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+//    if (IS_OS_8_OR_LATER) {
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes: (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    } else {
+//        [application registerForRemoteNotificationTypes:
+//         UIRemoteNotificationTypeBadge |
+//         UIRemoteNotificationTypeAlert |
+//         UIRemoteNotificationTypeSound];
+//    }
+    
+    // JPush
+    [self registerJPushWithOptions:launchOptions];
+    
+    
+    
+    
     
     return YES;
 }
+
 
 - (void)showWelcomeVC
 {
@@ -166,6 +184,38 @@
     SAKShareConfig* config = [[BYShareConfig alloc] init];
     [SAKShareEngine enableShareWithConfig:config];
 }
+
+
+/** 注册JPush 极光推送 */
+- (void)registerJPushWithOptions:(NSDictionary *)launchOptions {
+    // JPush Required
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        //categories
+        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                       UIUserNotificationTypeSound |
+                                                       UIUserNotificationTypeAlert)
+                                           categories:nil];
+    } else {
+        //categories nil
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+#else
+         //categories nil
+                                           categories:nil];
+        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                       UIRemoteNotificationTypeSound |
+                                                       UIRemoteNotificationTypeAlert)
+#endif
+         // Required
+                                           categories:nil];
+    }
+    [APService setupWithOption:launchOptions];
+    
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication*)application
 {
@@ -214,14 +264,53 @@
 }
 
 #pragma mark -
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // JPush Required
+    [APService handleRemoteNotification:userInfo];
+}
+
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
           fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [[BYPushCenter sharedPushCenter] handleRemoteInfoWithApplication:application userinfo:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
+//    completionHandler(UIBackgroundFetchResultNewData);
     //[MBProgressHUD topShowTmpMessage:userInfo[@"aps"][@"alert"]];
 
+    // JPush Required
+    // IOS 7 Support Required
+    [APService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+    
+//    
+//    _window1 = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    _window1.windowLevel = UIWindowLevelAlert;
+//    _window1.backgroundColor = [UIColor blackColor];
+//    UIViewController *vc1 = [[UIViewController alloc] init];
+//    _window1.rootViewController = vc1;
+//    _window1.hidden = NO;
+//    
+////    if (launchOptions != nil) {
+////        NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+////        window2 = [[UIWindow alloc] initWithFrame:CGRectMake(25, 100, 100, 100)];
+////        window2.windowLevel = UIWindowLevelAlert;
+////        window2.backgroundColor = [UIColor redColor];
+////        UIViewController *vc2 = [[UIViewController alloc] init];
+////        window2.rootViewController = vc2;
+////        window2.hidden = NO;
+//        if (userInfo != nil) {
+////            [[BYPushCenter sharedPushCenter] handleRemoteInfoWithApplication:application userinfo:userInfo];
+//            _window3 = [[UIWindow alloc] initWithFrame:CGRectMake(50, 200, 100, 100)];
+//            _window3.windowLevel = UIWindowLevelAlert;
+//            _window3.backgroundColor = [UIColor orangeColor];
+//            UIViewController *vc3 = [[UIViewController alloc] init];
+//            _window3.rootViewController = vc3;
+//            _window3.hidden = NO;
+//        }
+////    }
+
+
+    
     //    // 记录远程通知和回调，在数据加载完成之后需要这些信息
     //    self.userInfo = userInfo;
     //    self.completionHandler = completionHandler;
@@ -237,11 +326,20 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSString* token = [NSString stringWithFormat:@"%@", deviceToken];
-//    NSLog(@"%@",token);
     [iConsole log:@"设备token:%@",token];
     [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"com.biyao.push.token"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [[BYAppCenter sharedAppCenter] uploadToken:token];
+//    [[BYAppCenter sharedAppCenter] uploadToken:token];
+    
+    // JPush Required
+    [APService registerDeviceToken:deviceToken];
+    BYLog(@"deviceToken:%@", deviceToken);
+    
+    // 将JPush的registrationID上传至自己的服务器
+//    NSString *jpushID = [APService registrationID];
+    [iConsole log:@"JPush设备token:%@", [APService registrationID]];
+    [[BYAppCenter sharedAppCenter] uploadToken:[APService registrationID]];
+
     
     //[MBProgressHUD topShowTmpMessage:token];
 
@@ -259,15 +357,6 @@
 
 #pragma mark -share
 
-- (void)didReceiveWeiboRequest:(WBBaseRequest*)request
-{
-}
-
-- (void)didReceiveWeiboResponse:(WBBaseResponse*)response
-{
-    return;
-}
-
 - (BOOL)application:(UIApplication*)application handleOpenURL:(NSURL*)url
 {
 
@@ -284,24 +373,24 @@
     }
     
     //如果极简 SDK 不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给 SDK
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary* resultDic) {
-            BYLog(@"result = %@",resultDic);
-            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                [[BYPayCenter payCenter] preCheckPayStatus];
-            }
-
-            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"AliPayResult" object:nil userInfo:@{ @"errCode" : @(resp.errCode) }];
-        }];
-    }
-    if ([url.host isEqualToString:@"platformapi"]) { //支付宝钱包快登授权返回 authCode
-        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary* resultDic) {
-            BYLog(@"result = %@",resultDic);
-            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                [[BYPayCenter payCenter] preCheckPayStatus];
-            }
-        }];
-    }
+//    if ([url.host isEqualToString:@"safepay"]) {
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary* resultDic) {
+//            BYLog(@"result = %@",resultDic);
+//            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+//                [[BYPayCenter payCenter] preCheckPayStatus];
+//            }
+//
+//            //            [[NSNotificationCenter defaultCenter] postNotificationName:@"AliPayResult" object:nil userInfo:@{ @"errCode" : @(resp.errCode) }];
+//        }];
+//    }
+//    if ([url.host isEqualToString:@"platformapi"]) { //支付宝钱包快登授权返回 authCode
+//        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary* resultDic) {
+//            BYLog(@"result = %@",resultDic);
+//            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+//                [[BYPayCenter payCenter] preCheckPayStatus];
+//            }
+//        }];
+//    }
 
     //微信支付 和 微信授权
     if ([sourceApplication isEqualToString:@"com.tencent.xin"]) {
@@ -330,9 +419,10 @@
         NSString* strMsg = [NSString stringWithFormat:@""];
         switch (resp.errCode) {
         case WXSuccess: {
-            strMsg = @"支付成功";
-             [[BYPayCenter payCenter] preCheckPayStatus];
-
+//            strMsg = @"支付成功";
+//             [[BYPayCenter payCenter] preCheckPayStatus];
+            strMsg = @"支付模块已经移除";
+            
         } break;
         case -1:
             strMsg = resp.errStr;

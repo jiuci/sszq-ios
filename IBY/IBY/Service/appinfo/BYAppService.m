@@ -19,7 +19,6 @@
             finished(nil,error);
             return ;
         }
-        NSLog(@"%@",data);
         BYVersionInfo *versionInfo = [BYVersionInfo objectWithKeyValues:data[@"AppUpdate"]];
         finished(versionInfo,nil);
     }];
@@ -27,11 +26,16 @@
 
 - (void)uploadToken:(NSString*)token finished:(void (^)(BOOL success, BYError* error))finished
 {
-    NSString* url = @"/apppush/token/put";  
+    NSString* url = @"/apppush/token/put";
     NSDictionary* params = @{
-        @"pushtoken" : token,
-        @"enable" : @(1)
-    };
+                             @"pushtoken" : token,
+                             @"enable" : @(1)
+                             };
+//    NSString* url = SSZQAPI_PUSH_REFRESHTOKEN;
+//    NSDictionary* params = @{
+//                             @"pushtoken" : token,
+//                             @"enable" : @(1)
+//                             };
     [BYNetwork post:url params:params finish:^(NSDictionary* data, BYError* error) {
         if (error) {
             finished(NO,error);

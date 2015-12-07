@@ -17,4 +17,5 @@ typedef void (^BYSwitchHandler)(id sender);
 - (void)addButtonWithBtn:(UIButton*)btn handle:(BYSwitchHandler)handler;
 - (void)setSelectedAtIndex:(int)aIndex;
 
+
 @end

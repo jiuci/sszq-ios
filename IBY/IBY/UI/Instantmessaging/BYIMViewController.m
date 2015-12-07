@@ -16,7 +16,7 @@
 #import "NSDate+Category.h"
 #import "MessageReadManager.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "MJRefresh.h"
+//#import "MJRefresh.h"
 #import "BYIMService.h"
 
 #define KPageCount 20
@@ -178,7 +178,7 @@
     _textTable.dataSource = self;
     _textTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_textTable];
-    [self.textTable addHeaderWithTarget:self action:@selector(headerRereshing)];
+//    [self.textTable addHeaderWithTarget:self action:@selector(headerRereshing)];
     _textTable.backgroundColor = BYColorBG;
     
     _dataSource = [NSMutableArray array];
@@ -278,14 +278,14 @@
                             //                        NSLog(@"注册成功 %@",easeMobID);
                             [wself updateUI];
                         }else{
-                            NSLog(@"error :%@",error);
+                            BYLog(@"error :%@",error);
                             [MBProgressHUD topShowTmpMessage:@"登陆客服系统失败，请重试"];
                             [self.navigationController popViewControllerAnimated:YES];
                         }
                     } onQueue:nil];
                 }
                 else{
-                    NSLog(@"---%@",error);
+                    BYLog(@"---%@",error);
                     [MBProgressHUD topShowTmpMessage:@"登陆客服系统失败，请重试"];
                     
                     [self.navigationController popViewControllerAnimated:YES];
@@ -361,7 +361,7 @@
         [self loadMoreMessagesFrom:firstMessage.timestamp count:KPageCount append:YES];
     }
     [self reloadData];
-    [self.textTable headerEndRefreshing];
+//    [self.textTable headerEndRefreshing];
 }
 
 - (void)loadMoreMessagesFrom:(long long)timestamp count:(NSInteger)count append:(BOOL)append
@@ -534,10 +534,10 @@
     }];
     [[EaseMob sharedInstance].chatManager asyncSendMessage:message progress:self prepare:nil onQueue:nil completion:^(EMMessage * message, EMError *error){
         if (error) {
-            NSLog(@"发送失败%@",error);
+            BYLog(@"发送失败%@",error);
             //            [MBProgressHUD topShowTmpMessage:@"消息发送失败"];
         }else{
-            NSLog(@"发送成功%@",message);
+            BYLog(@"发送成功%@",message);
         }
     } onQueue:nil];
     _inputTextField.text = @"";
@@ -932,7 +932,7 @@
                     }
                     else
                     {
-                        NSLog(@"Read %@ failed!", localPath);
+                        BYLog(@"Read %@ failed!", localPath);
                     }
                     return ;
                 }
@@ -956,7 +956,7 @@
                         }
                         else
                         {
-                            NSLog(@"Read %@ failed!", localPath);
+                            BYLog(@"Read %@ failed!", localPath);
                         }
                         return ;
                     }

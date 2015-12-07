@@ -12,7 +12,7 @@
 @implementation BYVerifyCodeEngine
 + (void)fetchImageVerifyCode:(void (^)(UIImage*, BYError*))finished
 {
-    NSString* url = @"vcode/getvcode";
+    NSString* url = SSZQAPI_VCODE_GETVCODE;
     NSDictionary* param = @{ @"id" : [BYAppCenter sharedAppCenter].uuid };
     [BYNetwork get:url
             params:param
@@ -38,7 +38,7 @@
 }
 + (void)checkImageVerifyCode:(NSString*)code finish:(void (^)(BOOL success, BYError* error))finished;
 {
-    NSString* url = @"vcode/validatevcode";
+    NSString* url = SSZQAPI_VCODE_VALIDATEVCODE;
     NSDictionary* param = @{
         @"captcha_input" : code,
         @"id" : [BYAppCenter sharedAppCenter].uuid
@@ -80,7 +80,7 @@
 }
 + (void)fetchSMSVerifyCodeForRegistWithPhone:(NSString*)phoneNum finish:(void (^)(BYFetchVerifyCodeStatus status, BYError* error))finished;
 {
-    NSString* url = @"user/customer/MobilePreRegist";
+    NSString* url = SSZQAPI_SMS_CHECKUSER;
     NSDictionary* param = @{ @"mobile" : phoneNum };
 
     [BYNetwork post:url
@@ -102,7 +102,7 @@
 
 + (void)fetchSMSVerifyCodeForResetPasswordWithPhone:(NSString*)phoneNum finish:(void (^)(BYFetchVerifyCodeStatus status, BYError* error))finished;
 {
-    NSString* url = @"user/customer/CustomerAcquireCode4App";
+    NSString* url = SSZQAPI_SMS_VERYCODE;
     NSDictionary* param = @{ @"Mobile" : phoneNum };
 
     [BYNetwork post:url

@@ -34,7 +34,7 @@
         isActive = 0;
         //opened from a push notification when the app was on background
         switch (unit.type) {
-        case BYPushTypeDesignDetail: {
+        case BYPushTypeDesignDetail: {  // 1
             if (unit.pushParams[@"did"]) {
                 NSString* designDetailUrl = [NSString stringWithFormat:@"%@%d",BYURL_M_DetailDesign,[unit.pushParams[@"did"] intValue]];
                 [BYAppCenter sharedAppCenter].pushId = unit.pushId;
@@ -44,12 +44,14 @@
 //                [[BYPortalCenter sharedPortalCenter] portTo:BYPortalDesignDetail params:unit.pushParams];
             }
         } break;
-        case BYPushTypeMWeb: {
+        case BYPushTypeMWeb: {  // 2
             if (unit.pushParams[@"url"] && [unit.pushParams[@"url"] hasPrefix:@"http://"]) {
                 [BYAppCenter sharedAppCenter].pushId = unit.pushId;
                 NSDictionary* params = @{@"JumpURL":unit.pushParams[@"url"]};
                 [iConsole log:@"url %@",params];
-                [[BYPortalCenter sharedPortalCenter] portTo:BYPortalHome params:params];
+//                [[BYPortalCenter sharedPortalCenter] portTo:BYPortalHome params:params];
+                // pushUrl跳转
+                [[BYPortalCenter sharedPortalCenter] portToPushUrlWithParams:params];
             }
         } break;
         default:

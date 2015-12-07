@@ -23,7 +23,7 @@ BYError* makeUsrError()
 
 - (void)refreshToken:(void (^)(BOOL isSuccess, BYError* error))finished
 {
-    NSString* url = @"/user/customer/refreshtoken";
+    NSString* url = SSZQAPI_PUSH_REFRESHTOKEN;
     [BYNetwork post:url params:nil finish:^(NSDictionary* data, BYError* error) {
         if (data && !error) {
             //成功

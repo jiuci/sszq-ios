@@ -9,17 +9,17 @@
 #import "SAKShareEngine.h"
 #import "SAKPipeBase.h"
 #import "SAKPipeQQClient.h"
-#import "SAKPipeQQWeibo.h"
-#import "SAKPipeQzone.h"
-#import "SAKPipeSinaWeibo.h"
+//#import "SAKPipeQQWeibo.h"
+//#import "SAKPipeQzone.h"
+//#import "SAKPipeSinaWeibo.h"
 #import "SAKPipeWeixin.h"
 #import "SAKPipeWeixinFriends.h"
 #import "SAKPipeSMS.h"
-#import "WeiboSDK.h"
+//#import "WeiboSDK.h"
 
 static NSString* shareMethodNames[] = { @"新浪微博", @"QQ空间", @"腾讯微博", @"短信", @"微信", @"微信朋友圈", @"QQ好友" };
 static NSString* sharePipeNames[] = {
-    @"SAKPipeQQWeibo",
+    @"SAKPipeSinaWeibo",
     @"SAKPipeQzone",
     @"SAKPipeQQWeibo",
     @"SAKPipeSMS",
@@ -90,8 +90,8 @@ static NSString* sharePipeNames[] = {
         [weixin handleOpenURL:url didShare:finishBlock];
     }
     else if ([scheme compare:curConfig.sinaClientKey options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-        SAKPipeSinaWeibo* sinaWeibo = (SAKPipeSinaWeibo*)[self pipeByMedia:SAKShareMediaSinaWeibo];
-        [sinaWeibo handleOpenURL:url didShare:finishBlock];
+//        SAKPipeSinaWeibo* sinaWeibo = (SAKPipeSinaWeibo*)[self pipeByMedia:SAKShareMediaSinaWeibo];
+//        [sinaWeibo handleOpenURL:url didShare:finishBlock];
     }
 }
 
@@ -163,9 +163,11 @@ static int indexByShareMethod(SAKShareMedia shareMethod)
     self = [super init];
     if (self) {
         NSMutableArray* aArray = [NSMutableArray array];
-        [aArray addObject:[[SAKPipeSinaWeibo alloc] init]];
-        [aArray addObject:[[SAKPipeQzone alloc] init]];
-        [aArray addObject:[[SAKPipeQQWeibo alloc] init]];
+        // bug此处为了解决数组越界，暂用办法
+        [aArray addObject:[[SAKPipeSMS alloc] init]];
+        [aArray addObject:[[SAKPipeSMS alloc] init]];
+        [aArray addObject:[[SAKPipeSMS alloc] init]];
+        // 以下正常
         [aArray addObject:[[SAKPipeSMS alloc] init]];
         [aArray addObject:[[SAKPipeWeixin alloc] init]];
         [aArray addObject:[[SAKPipeWeixinFriends alloc] init]];

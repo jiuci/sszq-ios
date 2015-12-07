@@ -17,6 +17,9 @@
 @property (nonatomic, weak) IBOutlet UILabel* rightLabel;
 @end
 
+static CGFloat bottomFontSize = 14;
+
+
 @implementation BYAboutVC
 - (void)viewDidLoad
 {
@@ -27,11 +30,11 @@
 
 - (void)setupUI
 {
-    //3个cell高度44*3
     self.view.height = SCREEN_HEIGHT - self.navigationController.navigationBar.height - [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float cellsTop =self.view.height - 20 - 21 - 21 - 16 - 44 * 4;
-    _bodyView = [[BYLinearScrollView alloc] initWithFrame:BYRectMake(0, cellsTop, SCREEN_WIDTH, 44 * 4)];
-    //    _bodyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    float cellsTop =self.view.height - 20 - 21 - 21 - 16 - 44 * 1;
+    CGFloat cellsTop = self.view.height / 2;
+    _bodyView = [[BYLinearScrollView alloc] initWithFrame:BYRectMake(0, cellsTop, SCREEN_WIDTH, 44 * 1)];
+//    _bodyView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _bodyView.autoAdjustContentSize = YES;
     _bodyView.minContentSizeHeight = 0;
     [self.view addSubview:_bodyView];
@@ -44,42 +47,42 @@
     _logoImageView.centerX = SCREEN_WIDTH / 2;
     _logoImageView.centerY = cellsTop / 2;
     
-    [self appendCell:nil
-               title:@"给个好评"
-                 top:0
-                 sel:@selector(onEvaluation)];
-    
-    [self appendCell:nil
-               title:@"关于必要"
-                 top:0
-                 sel:@selector(onAbout)];
+//    [self appendCell:nil
+//               title:@"给个好评"
+//                 top:0
+//                 sel:@selector(onEvaluation)];
+//    
+//    [self appendCell:nil
+//               title:@"关于顺手赚钱"
+//                 top:0
+//                 sel:@selector(onAbout)];
     
     [self appendCell:nil
                title:@"用户协议"
                  top:0
                  sel:@selector(onProtocol)];
     
-    NSString * str = [NSString stringWithFormat:@"版本号"];
-    BYMineCell* cell = [BYMineCell cellWithTitle:str icon:nil target:self sel:nil];
-    UILabel * label = [[UILabel alloc]initWithFrame:cell.titleLabel.frame];
-    [cell addSubview:label];
-    label.right= cell.width - 12;
-    label.textAlignment = NSTextAlignmentRight;
-    label.font = Font(14);
-    label.textColor = BYColor999;
-    label.text = @"v2.2.6";
-    cell.showRightArrow = NO;
-    cell.showBottomLine = YES;
-    [self.bodyView by_addSubview:cell paddingTop:0];
-   
+//    NSString * str = [NSString stringWithFormat:@"版本号"];
+//    BYMineCell* cell = [BYMineCell cellWithTitle:str icon:nil target:self sel:nil];
+//    UILabel * label = [[UILabel alloc]initWithFrame:cell.titleLabel.frame];
+//    [cell addSubview:label];
+//    label.right= cell.width - 12;
+//    label.textAlignment = NSTextAlignmentRight;
+//    label.font = Font(14);
+//    label.textColor = BYColor999;
+//    label.text = @"v2.2.6";
+//    cell.showRightArrow = NO;
+//    cell.showBottomLine = YES;
+//    [self.bodyView by_addSubview:cell paddingTop:0];
+//   
 
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.height = SCREEN_HEIGHT - self.navigationController.navigationBar.height - [[UIApplication sharedApplication] statusBarFrame].size.height;
-    float cellsTop =self.view.height - 20 - 21 - 21 - 16 - 44 * 3;
-    _logoImageView.centerY = cellsTop / 2;
+//    self.view.height = SCREEN_HEIGHT - self.navigationController.navigationBar.height - [[UIApplication sharedApplication] statusBarFrame].size.height;
+//    float cellsTop =self.view.height - 20 - 21 - 21 - 16 - 44 * 3;
+//    _logoImageView.centerY = cellsTop / 2;
 }
 - (void)appendCell:(NSString*)icon title:(NSString*)title top:(CGFloat)top sel:(SEL)selecor
 {
@@ -92,30 +95,31 @@
 
 - (void)onEvaluation
 {
-    NSString * appstoreUrlString = @"itms-apps://itunes.apple.com/cn/app/id935095138?mt=8";
-    appstoreUrlString = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=935095138";
-    NSURL * url = [NSURL URLWithString:appstoreUrlString];
-    
-    if ([[UIApplication sharedApplication] canOpenURL:url])
-    {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-    else
-    {
-        NSLog(@"can not open");
-    }
+//    NSString * appstoreUrlString = @"itms-apps://itunes.apple.com/cn/app/id935095138?mt=8";
+//    appstoreUrlString = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=935095138";
+//    NSURL * url = [NSURL URLWithString:appstoreUrlString];
+//    
+//    if ([[UIApplication sharedApplication] canOpenURL:url])
+//    {
+//        [[UIApplication sharedApplication] openURL:url];
+//    }
+//    else
+//    {
+//        NSLog(@"can not open");
+//    }
 }
 
 - (void)onAbout
 {
-    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:BYURL_ABOUTBIYAO]];
-    webVC.useWebTitle = YES;
-    [self.navigationController pushViewController:webVC animated:YES];
+//    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:BYURL_ABOUTBIYAO]];
+//    webVC.useWebTitle = YES;
+//    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)onProtocol
 {
-    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:BYURL_SERVICE_PROTOCOL]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_PROTOCOL];
+    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:urlStr]];
     webVC.useWebTitle = YES;
     [self.navigationController pushViewController:webVC animated:YES];
 }

@@ -38,6 +38,41 @@
 #define BYURL_TEST_MINE @"http://192.168.97.69:8080/m.biyao.com/account/mine"
 
 
+#pragma mark - 顺手赚钱
+// 网页部分
+#define BYURL_BASE      @"http://m.biyao.com"
+#define SSZQURL_BASE    @"http://sf.m.biyao.com"
+#define SSZQURL_ERROR   @"/error.html"
+#define SSZQURL_HOME    @"/share/income.html"
+#define SSZQURL_WALLET  @"/share/money.html"
+#define SSZQURL_RANK    @"/share/ranklist.html"
+#define SSZQURL_SERVICE @"/service.html"
+#define SSZQURL_SERVICE_PROTOCOL @"/Static/statichtml/registxy.html"
+#define SSZQURL_SERVICE_SMSCODEHELPER @"/Static/statichtml/registxy.html"
+
+//    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
+
+
+// 后台数据接口
+#define SSZQAPI_BASE                @"http://sf-api.biyao.com"      // 必要@"http://appapi.biyao.com/"
+#define SSZQAPI_BASE_LGOIN          @"http://192.168.99.60:8085"    // 99 ? 98
+#define SSZQAPI_USER_CUSTOMERREGISTERSERVLET    @"/user/customer/CustomerRegisterServlet"   // @"user/customer/CustomerRegisterServlet"
+#define SSZQAPI_USER_UPDATEPASSWORD @"/user/customer/UpdatePassword" // @"user/customer/UpdatePassword"
+
+#define SSZQAPI_USER_LGOIN          @"/user/customer/login"     // @"/user/customer/login"
+#define SSZQAPI_PUSH_REFRESHTOKEN   @"/user/customer/refreshtoken"  //-
+
+// 验证
+#define SSZQAPI_SMS_VERYCODE        @"user/customer/CustomerAcquireCode4App" //-
+#define SSZQAPI_SMS_CHECKUSER       @"user/customer/MobilePreRegist"
+#define SSZQAPI_VCODE_GETVCODE      @"vcode/getvcode"
+#define SSZQAPI_VCODE_VALIDATEVCODE @"vcode/validatevcode"
+
+// 以下未做替换
+#define SSZQURL_M_DetailDesign @""
+#define SSZQAPP_SCHEMA @"sszq"  // 无用
+
+
 
 
 

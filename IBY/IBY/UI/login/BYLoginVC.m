@@ -116,6 +116,10 @@
             [self.navigationController dismissViewControllerAnimated:YES
                                                           completion:nil];
         }];
+    if (_isHomeLogin) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
+    
     self.view.height = SCREEN_HEIGHT - self.navigationController.navigationBar.height -20;
     //logo
     UIImageView* biyaoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 22, 144, 90)];
@@ -156,7 +160,7 @@
     // user&pwd
     _userTextField = [[UITextField alloc] initWithFrame:CGRectMake(inputBackground.left, inputBackground.top, SCREEN_WIDTH - 38 * 2 - 7, 40)];
     _userTextField.leftViewMode = UITextFieldViewModeAlways;
-    _userTextField.placeholder = @"请输入账号/手机号";
+    _userTextField.placeholder = @"请输入手机号";
     UIImageView* accountImgView =
         [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_username_default"]];
     accountImgView.contentMode = UIViewContentModeCenter;
@@ -355,6 +359,7 @@
     [super viewWillAppear:animated];
     BOOL showQQ = [_loginService canUseQQlogin];
     BOOL showWX = [_loginService canUseWXlogin];
+    
     
     if (_showThirdPartyLogin == NO) {
         showQQ = NO;
@@ -610,3 +615,24 @@ BYNavVC* makeLoginnav(BYLoginSuccessBlock blk,BYLoginCancelBlock cblk)
 
     return nav;
 }
+
+
+BYNavVC* makeLoginNavFromHome(BYLoginSuccessBlock blk,BYLoginCancelBlock cblk)
+{
+    BYLoginVC* vc = [BYLoginVC sharedLoginVC];
+    vc.showThirdPartyLogin = NO;
+    vc.isHomeLogin = YES;
+    vc.successBlk = blk;
+    vc.cancelBlk = cblk;
+    BYNavVC* nav = [BYNavVC nav:vc title:@"登录"];
+    return nav;
+}
+
+
+
+
+
+
+
+
+

@@ -9,11 +9,16 @@
 #import "BYBaseVC.h"
 #import "BYCommonWebVC.h"
 #import "BYMutiSwitch.h"
-@interface BYHomeVC : BYBaseVC
+
+
+@interface BYHomeVC : BYBaseVC  <UIWebViewDelegate>
 
 @property (nonatomic, assign) BYCommonWebVC * commonWebVC;
 @property (nonatomic, strong) BYMutiSwitch *mutiSwitch;
 @property (nonatomic, strong) NSString * needJumpUrl;
+
+@property (nonatomic, assign) BOOL isNeedJumpVC;
+
 - (void)reloadData;
 - (void)onCelltap:(NSString*)link;
 

@@ -51,6 +51,9 @@ void inputCookies()
     setCookies(@"userinfo", userinfo);
     setCookies(@"idcard", idcard);
 //    logCookies();
+    
+//    NSString *domain = @".biyao.com";
+//    setCookies(@"Domain", domain);
 }
 
 BOOL checkLoginCookies()
@@ -168,7 +171,7 @@ void loggobackCookies()
     for (NSHTTPCookie* obj in cookies) {
         if ([obj.name isEqualToString:@"gobackuri"]) {
             objvalue = [obj.value URLDecodedString];
-            NSLog(@"gobackuri - %@ - %@",objvalue,obj.domain);
+            BYLog(@"gobackuri - %@ - %@",objvalue,obj.domain);
         }
     }
 
@@ -181,7 +184,7 @@ void logCookies()
     NSArray* cookies = [NSArray arrayWithArray:[cookieJar cookies]];
     for (NSHTTPCookie* obj in cookies) {
 //        NSLog(@"%@ - %@", obj.name, obj.value);
-        NSLog(@"%@ - %@ - %@ - %@", obj.name, obj.value, obj.domain, obj.path);
+        BYLog(@"%@ - %@ - %@ - %@", obj.name, obj.value, obj.domain, obj.path);
     }
 }
 

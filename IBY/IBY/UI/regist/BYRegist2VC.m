@@ -117,7 +117,8 @@
 }
 - (IBAction)onSMScodeHelper:(id)sender
 {
-    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:BYURL_SERVICE_SMSCODEHELPER]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
+    BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:urlStr]];
     webVC.useWebTitle = YES;
     _enterSMSHelper = YES;
     [self.navigationController pushViewController:webVC animated:YES];

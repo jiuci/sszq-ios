@@ -218,7 +218,7 @@ NSString* const BYAppSessionInvalidNotification = @"com.biyao.app.sessionInvalid
 {
     
     int oldUid = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"com.biyao.push.last.uid"];
-    if (oldUid == [BYAppCenter sharedAppCenter].user.userID) {
+    if (oldUid == [BYAppCenter sharedAppCenter].user.userID && [BYAppCenter sharedAppCenter].isLogin) {
         return;
     }
 //    NSString* pushTokenKey = [NSString stringWithFormat:@"com.biyao.push.token.uid:%d",[BYAppCenter sharedAppCenter].user.userID];//[@"com.biyao.push.token" append:token];

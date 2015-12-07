@@ -21,9 +21,15 @@ typedef void (^BYLoginCancelBlock)();
 @property (strong, nonatomic) UITextField* userTextField;
 @property (assign, nonatomic) BYAppDelegate* appDelegate;
 @property (assign, nonatomic) BOOL showThirdPartyLogin;
+@property (nonatomic, assign) BOOL isHomeLogin;
+
+
 + (instancetype)sharedLoginVC;
 - (void)clearData;
 @end
 
 //quick creater with successBlk
 BYNavVC* makeLoginnav(BYLoginSuccessBlock blk,BYLoginCancelBlock cblk);
+
+BYNavVC* makeLoginNavFromHome(BYLoginSuccessBlock blk,BYLoginCancelBlock cblk);
+

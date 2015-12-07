@@ -12,11 +12,18 @@
 #import "BYLoginService.h"
 #import "BYAutosizeBgButton.h"
 
+#import "BYRegistSucWebVC.h"
+#import "BYHomeVC.h"
+#import "BYAppDelegate.h"
+
 @interface BYRegist3VC ()
 @property (weak, nonatomic) IBOutlet UITextField* firstPwdTextField;
 @property (weak, nonatomic) IBOutlet UIImageView* bgInput;
 @property (weak, nonatomic) IBOutlet UIImageView* iconInputLeftView;
 @property (weak, nonatomic) IBOutlet BYAutosizeBgButton* btnNext;
+
+@property (nonatomic, strong) UIButton *testBtn;
+
 @end
 
 @implementation BYRegist3VC
@@ -50,7 +57,16 @@
     }];
     self.autoHideKeyboard = YES;
     self.btnNext.enabled = NO;
+    
+    [self setupTestBtn];
 }
+
+- (void)setupTestBtn {
+//    _testBtn = [UIButton buttonWith]
+}
+
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -75,6 +91,14 @@
     [MBProgressHUD topShow:@"注册中..."];
     [self.registService registByUser:user pwd:pwd finsh:^(BOOL success, BYError* error) {
 //        [MBProgressHUD topHide];
+        
+        if (success) {
+            BYHomeVC* homeVC = ((BYAppDelegate*)[UIApplication sharedApplication].delegate).homeVC;
+            BYRegistSucWebVC *registSucWebVC = [[BYRegistSucWebVC alloc] init];
+            [homeVC presentViewController:registSucWebVC animated:YES completion:nil];
+        }
+
+        
         if(error){
             alertError(error);
         }else{

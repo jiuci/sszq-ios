@@ -13,11 +13,13 @@
 #import "BYBaseWebVC.h"
 #import "BYAlertView.h"
 
-#import "BYPayVC.h"
+//#import "BYPayVC.h"
 #import "BYCommonWebVC.h"
 #import "BYNavVC.h"
 #import "BYHomeVC.h"
 #import "BYMineVC.h"
+
+#import "BYPushWebVC.h"
 
 @implementation BYPortalCenter
 
@@ -93,8 +95,8 @@
         NSString *order_id_list = params[@"order_id_list"];
         
         if (order_id_list && curVC) {
-            BYPayVC* payvc = [[BYPayVC alloc] initWithOrderId:order_id_list];
-            [curVC.navigationController pushViewController:payvc animated:YES];
+//            BYPayVC* payvc = [[BYPayVC alloc] initWithOrderId:order_id_list];
+//            [curVC.navigationController pushViewController:payvc animated:YES];
         }else{
             BYLog(@"error ,can not go to payvc");
         }
@@ -119,5 +121,18 @@
         break;
     }
 }
+
+
+- (void)portToPushUrlWithParams:(NSDictionary *)params {
+    BYNavVC* nav = ((BYAppDelegate*)[UIApplication sharedApplication].delegate).homeNav;
+    BYHomeVC* homeVC = ((BYAppDelegate*)[UIApplication sharedApplication].delegate).homeVC;
+    BYPushWebVC *pushWebVC = [[BYPushWebVC alloc] init];
+    pushWebVC.urlStr = params[@"JumpURL"];
+    [homeVC presentViewController:pushWebVC animated:YES completion:nil];
+//    [nav pushViewController:pushWebVC animated:NO];
+//    [homeVC.navigationController pushViewController:pushWebVC animated:YES];
+}
+
+
 
 @end

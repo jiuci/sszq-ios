@@ -9,7 +9,7 @@
 #import "BYBaseVC.h"
 #import "BYTableCell.h"
 #import "BYCustomTableCells.h"
-#import "MJRefresh.h"
+//#import "MJRefresh.h"
 
 /**
  cell会先判断 cellClassName，如果有，创建相应的cell

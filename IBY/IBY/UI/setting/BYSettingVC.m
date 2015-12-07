@@ -42,7 +42,8 @@
     BYAppService* _appService;
     BYBaseCell* _logoutCell;
     UILabel* cacheLabel;
-    UILabel* pushNoti;
+//    UILabel* pushNoti;
+    UIImageView *pushNoti;
     
 }
 @property (nonatomic, strong) BYLinearScrollView* bodyView;
@@ -70,15 +71,15 @@
     _loginButton.hidden = ![BYAppCenter sharedAppCenter].isLogin;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0){
         if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == UIUserNotificationTypeNone) {
-            pushNoti.text = @"已关闭";
+            pushNoti.highlighted = NO;
         }else{
-            pushNoti.text = @"已开启";
+            pushNoti.highlighted = YES;
         }
     }else{
         if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone) {
-            pushNoti.text = @"已关闭";
+            pushNoti.highlighted = NO;
         }else{
-            pushNoti.text = @"已开启";
+            pushNoti.highlighted = YES;
         }
     }
     
@@ -151,12 +152,16 @@
                  des:@""
                  sel:@selector(onNotification)];
     
-    pushNoti = [[UILabel alloc]init];
+    pushNoti = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"btn_messagepush_off"]
+                                 highlightedImage:[UIImage imageNamed:@"btn_messagepush_on"]];
+    pushNoti.contentMode = UIViewContentModeScaleAspectFit;
     [notiCell addSubview:pushNoti];
-    pushNoti.frame = CGRectMake(SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2 - 24, 40);
-    pushNoti.textAlignment = NSTextAlignmentRight;
-    pushNoti.font = [UIFont systemFontOfSize:12];
-    pushNoti.textColor = HEXCOLOR(0x666666);
+    pushNoti.frame = CGRectMake(0, 7, 50, 30);
+    pushNoti.right = SCREEN_WIDTH - 20;
+//    pushNoti.textAlignment = NSTextAlignmentRight;
+//    pushNoti.font = [UIFont systemFontOfSize:12];
+//    pushNoti.textColor = HEXCOLOR(0x666666);
+    
 //    switcher = [[UISwitch alloc]init];
 //    [notiCell addSubview:switcher];
 //    switcher.onTintColor = BYColorb768;
@@ -243,7 +248,11 @@
     UIAlertView * alert = [UIAlertView bk_alertViewWithTitle:@"您确定要退出吗？" message:@""];
     [alert bk_addButtonWithTitle:@"确定" handler:^{
         [[BYAppCenter sharedAppCenter] logout];
-        [[BYPortalCenter sharedPortalCenter] portTo:BYPortalHome];
+//        [[BYPortalCenter sharedPortalCenter] portTo:BYPortalHome];
+        BYLoginSuccessBlock successblock = ^(){
+            nil;
+        };
+        [self presentViewController:makeLoginNavFromHome(successblock, nil) animated:NO completion:nil];
     }];
     [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
     }];
@@ -302,7 +311,7 @@
 
 - (void)onNotification
 {
-    UIAlertView * alert = [UIAlertView bk_alertViewWithTitle:@"" message:@"开启或停用，可在设置>通知中心>必要，手动设置"];
+    UIAlertView * alert = [UIAlertView bk_alertViewWithTitle:@"" message:@"开启或停用，可在设置>通知中心>顺手赚钱，手动设置"];
     [alert bk_setCancelButtonWithTitle:@"确定" handler:^{
     }];
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {

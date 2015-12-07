@@ -25,7 +25,7 @@
     if (self.token) {
         BOOL shouldsend = YES;
         if (_statusTime) {
-            NSLog(@"%f", [[NSDate date]timeIntervalSinceDate:_statusTime] );
+            BYLog(@"%f", [[NSDate date]timeIntervalSinceDate:_statusTime] );
             shouldsend = [[NSDate date]timeIntervalSinceDate:_statusTime] > 60;
         }
         if (!shouldsend) {
@@ -38,7 +38,7 @@
     __weak typeof (self) wself = self;
     [BYIMEngine getToken:^(NSDictionary * dic,BYError* error){
         if (error) {
-            NSLog(@"error%@",error);
+            BYLog(@"error%@",error);
             finished(NO,error);
         }else{
             NSString * token = dic[@"access_token"];

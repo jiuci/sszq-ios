@@ -10,6 +10,7 @@
 
 @interface BYNavVC () <UINavigationControllerDelegate>
 @property (nonatomic, assign, readonly) BOOL isLocked;
+
 @end
 
 @implementation BYNavVC
@@ -31,6 +32,7 @@
 
     return nav;
 }
+
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -68,7 +70,7 @@
     }
 
     _isLocked = YES;
-
+    
     // 如果现在push的不是栈底控制器(最先push进来的那个控制器)
     if (self.viewControllers.count > 0) {
         viewController.hidesBottomBarWhenPushed = YES;
@@ -99,5 +101,17 @@
 {
     _isLocked = NO;
 }
+
+
+#pragma mark - 顺手赚钱
+- (BOOL)viewControllersExistVC:(Class)vcClass WithVCs:(NSArray *)vcs {
+    for (UIViewController *vc in vcs) {
+        if ([vc isMemberOfClass:vcClass]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 
 @end

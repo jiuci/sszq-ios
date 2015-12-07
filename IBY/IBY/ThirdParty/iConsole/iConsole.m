@@ -602,7 +602,7 @@ static void exceptionHandler(NSException* exception)
     if ([self sharedConsole].logLevel > iConsoleLogLevelNone) {
         NSString* message = [(NSString*)[NSString alloc] initWithFormat:format arguments:argList];
 
-        NSLog(@"%@", message);
+        BYLog(@"%@", message);
 
         if ([self sharedConsole].enabled) {
             if ([NSThread currentThread] == [NSThread mainThread]) {

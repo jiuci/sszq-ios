@@ -14,7 +14,7 @@
 
 + (void)refreshUserToken:(void (^)(BOOL isSuccess, BYError* error))finished
 {
-    NSString* url = @"/user/customer/refreshtoken";
+    NSString* url = SSZQAPI_PUSH_REFRESHTOKEN;
     [BYNetwork post:url params:nil finish:^(NSDictionary* data, BYError* error) {
         if (error) {
             finished(NO,error);
@@ -31,6 +31,10 @@
         finished(NO,err);
         return;
     }
+    
+#warning SSZQ-TEST----------------NEEDDO
+    // 后台接口暂时未调好，先不做网络请求
+    return;
     
     NSString* url = @"/user/customer/GetUserInformation";
     NSDictionary* params = @{
