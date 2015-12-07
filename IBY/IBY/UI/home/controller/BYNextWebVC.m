@@ -27,12 +27,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self sutupUI];
 
     if (_isHiddenNavBar) {
         self.navigationController.navigationBarHidden = YES;
     }
-    
-    [self sutupUI];
+
 }
 
 - (void)sutupUI {
@@ -66,6 +67,7 @@
 }
 
 
+
 #pragma mark -
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
     
@@ -82,9 +84,11 @@
         }
     }
     
+#warning SSZQ0-TEST----------NEEDDO
+    //  SSZQURL_MINE : @"/account/mine" --》@"/account/mine.html"
     if (_isJumpFromTapAction) {
         if ([requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_MINE]]) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:NO];
             return NO;
         }
     }

@@ -462,7 +462,7 @@
     nextWebVC.isJumpFromTapAction = YES;
     nextWebVC.isHiddenNavBar = YES;
 //    nextWebVC.navigationController.navigationBarHidden = YES;
-    [self.navigationController pushViewController:nextWebVC animated:YES];
+    [self.navigationController pushViewController:nextWebVC animated:NO];
     
 }
 

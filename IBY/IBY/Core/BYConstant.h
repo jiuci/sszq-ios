@@ -50,7 +50,7 @@
 #define SSZQURL_SERVICE_PROTOCOL        @"/Static/statichtml/registxy.html"
 #define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/registxy.html"
 #define SSZQURL_USER_SHARESFZ           @"/share/sharesfz.html"
-#define SSZQURL_MINE    @"/account/mine.html"
+#define SSZQURL_MINE    @"/account/mine"
 
 //    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
 
