@@ -38,6 +38,7 @@
 #import "BYRankWebVC.h"
 
 #import "BYIdcardVC.h"
+#import "BYNextWebVC.h"
 
 
 @interface BYMineVC ()
@@ -455,8 +456,13 @@
 
 - (void)onService
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE];
-    JumpToWebBlk(urlStr, nil);
+//    JumpToWebBlk(urlStr, nil);
+    BYNextWebVC *nextWebVC = [[BYNextWebVC alloc] init];
+    nextWebVC.urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE];
+    nextWebVC.isJumpFromTapAction = YES;
+    nextWebVC.isHiddenNavBar = YES;
+//    nextWebVC.navigationController.navigationBarHidden = YES;
+    [self.navigationController pushViewController:nextWebVC animated:YES];
     
 }
 

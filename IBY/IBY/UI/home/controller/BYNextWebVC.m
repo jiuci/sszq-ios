@@ -28,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    if (_isHiddenNavBar) {
+        self.navigationController.navigationBarHidden = YES;
+    }
+    
     [self sutupUI];
 }
 
@@ -70,8 +74,16 @@
     if (_isJumpFromTapAction) {
         if ([requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_HOME]] ||
             [requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_WALLET]] ||
-            [requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_RANK]]) {
+            [requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_RANK]]
+            ) {
             
+            [self.navigationController popViewControllerAnimated:YES];
+            return NO;
+        }
+    }
+    
+    if (_isJumpFromTapAction) {
+        if ([requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_MINE]]) {
             [self.navigationController popViewControllerAnimated:YES];
             return NO;
         }
