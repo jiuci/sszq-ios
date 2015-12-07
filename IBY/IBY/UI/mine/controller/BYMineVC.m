@@ -295,8 +295,9 @@
 #pragma mark -
 
 - (void)onIdcard {
-//    BYIdcardVC *idcardVC = [[BYIdcardVC alloc] init];
-//    [self.navigationController pushViewController:idcardVC animated:YES];
+    BYIdcardVC *idcardVC = [[BYIdcardVC alloc] init];
+    idcardVC.title = @"身份验证--测试";
+    [self.navigationController pushViewController:idcardVC animated:YES];
 }
 
 - (void)pageScroll{

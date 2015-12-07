@@ -38,6 +38,7 @@
 #define BYColorBG HEXCOLOR(0xeeeeee)
 #define BYColorClear [UIColor clearColor]
 #define BYColorWhite [UIColor whiteColor]
+#define BYColorFF4C4C HEXCOLOR(0xff4c4c)
 
 #define Font(x) [UIFont systemFontOfSize:x]
 #define ItalicFont(x) [UIFont italicSystemFontOfSize:x]

@@ -8,9 +8,17 @@
 
 #import "BYPushWebVC.h"
 
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "WebViewJavascriptBridge.h"
+#import "BYWebView.h"
+
+
 @interface BYPushWebVC ()
 
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WebViewJavascriptBridge* bridge;
+
 
 @end
 
@@ -20,9 +28,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setupUI];
+}
+
+- (void)setupUI {
     _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - 20)];
     _webView.delegate = self;
     [self.view addSubview:_webView];
+
+    // 微信分享跳转
+    _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView
+                                        webViewDelegate:self
+                                                handler:^(id data, WVJBResponseCallback responseCallback) {
+                                                    if (![data isKindOfClass:[NSDictionary class]]) {
+                                                        return;
+                                                    }
+                                                    BYH5Unit* unit = [BYH5Unit unitWithH5Info:data];
+                                                    if (unit) {
+                                                        [unit runFromVC:self];
+                                                    }
+                                                }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,6 +89,7 @@
 //            [UIView animateWithDuration:0.5 animations:^{
 //                self.view.transform = CGAffineTransformMakeTranslation(-SCREEN_WIDTH, 0.0);
 //            }];
+            nil;
         }];
         return NO;
         

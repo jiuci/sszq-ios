@@ -47,8 +47,9 @@
 #define SSZQURL_WALLET  @"/share/money.html"
 #define SSZQURL_RANK    @"/share/ranklist.html"
 #define SSZQURL_SERVICE @"/service.html"
-#define SSZQURL_SERVICE_PROTOCOL @"/Static/statichtml/registxy.html"
-#define SSZQURL_SERVICE_SMSCODEHELPER @"/Static/statichtml/registxy.html"
+#define SSZQURL_SERVICE_PROTOCOL        @"/Static/statichtml/registxy.html"
+#define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/registxy.html"
+#define SSZQURL_USER_SHARESFZ           @"/share/sharesfz.html"
 
 //    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
 
