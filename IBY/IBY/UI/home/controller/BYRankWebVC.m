@@ -132,6 +132,11 @@
         [MBProgressHUD topShowTmpMessage:@"网络异常，请检查您的网络"];
         return NO;
     }
+    
+    if (![BYAppCenter sharedAppCenter].isLogin) {
+        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
+        return NO;
+    }
 
     BYNextWebVC *nextWebVC = [[BYNextWebVC alloc] init];
     nextWebVC.urlStr = [request.URL absoluteString];

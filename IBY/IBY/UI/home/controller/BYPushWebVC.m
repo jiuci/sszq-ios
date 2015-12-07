@@ -60,7 +60,7 @@
 //        [self.view.layer addAnimation:popAnimaton forKey:@"pushedBackAnimation"];
 
 //        self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self dismissViewControllerAnimated:NO completion:^{
+        [self dismissViewControllerAnimated:YES completion:^{
 //            [UIView animateWithDuration:0.5 animations:^{
 //                self.view.transform = CGAffineTransformMakeTranslation(-SCREEN_WIDTH, 0.0);
 //            }];
