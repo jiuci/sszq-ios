@@ -42,14 +42,7 @@
 
 @interface BYAppDelegate () <WXApiDelegate,TencentSessionDelegate>
 
-
-@property (nonatomic, strong) UIWindow *window1;
-@property (nonatomic, strong) UIWindow *window2;
-@property (nonatomic, strong) UIWindow *window3;
-
 @property (nonatomic, strong) BYWelcomeVC* welcomeVC;
-
-
 
 @end
 
@@ -274,7 +267,7 @@
           fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [[BYPushCenter sharedPushCenter] handleRemoteInfoWithApplication:application userinfo:userInfo];
-//    completionHandler(UIBackgroundFetchResultNewData);
+    completionHandler(UIBackgroundFetchResultNewData);
     //[MBProgressHUD topShowTmpMessage:userInfo[@"aps"][@"alert"]];
 
     // JPush Required
@@ -282,33 +275,6 @@
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
     
-//    
-//    _window1 = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    _window1.windowLevel = UIWindowLevelAlert;
-//    _window1.backgroundColor = [UIColor blackColor];
-//    UIViewController *vc1 = [[UIViewController alloc] init];
-//    _window1.rootViewController = vc1;
-//    _window1.hidden = NO;
-//    
-////    if (launchOptions != nil) {
-////        NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-////        window2 = [[UIWindow alloc] initWithFrame:CGRectMake(25, 100, 100, 100)];
-////        window2.windowLevel = UIWindowLevelAlert;
-////        window2.backgroundColor = [UIColor redColor];
-////        UIViewController *vc2 = [[UIViewController alloc] init];
-////        window2.rootViewController = vc2;
-////        window2.hidden = NO;
-//        if (userInfo != nil) {
-////            [[BYPushCenter sharedPushCenter] handleRemoteInfoWithApplication:application userinfo:userInfo];
-//            _window3 = [[UIWindow alloc] initWithFrame:CGRectMake(50, 200, 100, 100)];
-//            _window3.windowLevel = UIWindowLevelAlert;
-//            _window3.backgroundColor = [UIColor orangeColor];
-//            UIViewController *vc3 = [[UIViewController alloc] init];
-//            _window3.rootViewController = vc3;
-//            _window3.hidden = NO;
-//        }
-////    }
-
 
     
     //    // 记录远程通知和回调，在数据加载完成之后需要这些信息
