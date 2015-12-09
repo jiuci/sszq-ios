@@ -217,6 +217,7 @@
     [_registButton setBackgroundImage:[[UIImage imageNamed:@"bg_btn_minor_press"] resizableImage] forState:UIControlStateHighlighted];
     [_registButton setTitle:@"还没有账号？快速注册" forState:UIControlStateNormal];
     [_registButton setTitleColor:HEXCOLOR(0xb768a5) forState:UIControlStateNormal];
+    _registButton.enabled = YES;
 
     //forgetpassword
     _forgetPasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -231,6 +232,7 @@
     _forgetPasswordButton.titleEdgeInsets = UIEdgeInsetsMake(0, _forgetPasswordButton.size.width - strSize.width, 0, 0);
     _forgetPasswordButton.titleLabel.textAlignment = NSTextAlignmentRight;
     [_forgetPasswordButton addTarget:self action:@selector(onForgotPassword) forControlEvents:UIControlEventTouchUpInside];
+    _forgetPasswordButton.enabled = YES;
 
     // captchaView
     _captchaView = [BYCaptchaView captchaView];
@@ -251,6 +253,10 @@
     scroll.showsVerticalScrollIndicator = NO;
     
     //thirdparty login
+//    [self setupThirdparty:scroll];
+}
+
+- (void)setupThirdparty:(UIScrollView *)scroll {
     BOOL showQQ = [_loginService canUseQQlogin];
     BOOL showWX = [_loginService canUseWXlogin];
     if (showQQ | showWX) {
@@ -312,11 +318,12 @@
             _WXbutton.centerX = SCREEN_WIDTH/2;
         }
     }
-    
-   
-    
-    
+
 }
+
+
+
+
 - (void)updateUI
 {
     if (_countForLoginTimes >= 3) {

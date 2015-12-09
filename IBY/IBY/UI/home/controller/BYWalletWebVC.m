@@ -135,13 +135,14 @@
     }
     
     if (![BYAppCenter sharedAppCenter].isLogin) {
-        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
+//        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
         return NO;
     }
 
     BYNextWebVC *nextWebVC = [[BYNextWebVC alloc] init];
     nextWebVC.urlStr = [request.URL absoluteString];
     nextWebVC.isJumpFromTapAction = YES;
+    nextWebVC.isHiddenNavBar = YES;
     [self.navigationController pushViewController:nextWebVC animated:YES];
     
     return NO;

@@ -58,4 +58,16 @@ typedef enum {
               header:(NSDictionary*)header
               finish:(void (^)(NSDictionary* data, BYError* error))finish;
 
+#pragma mark - 顺手赚钱身份证上传
+// 用于带有图片的接口
++ (void)postDataCompleteUrl:(NSString *)url
+                     params:(NSDictionary*)params
+                     finish:(void (^)(NSDictionary* data, BYError* error))finish;
+
++ (void)postAppendParamsCompleteUrl:(NSString *)url
+                             params:(NSDictionary *)params
+                             finish:(void (^)(NSDictionary *data, BYError *error))finish;
+
+
+
 @end

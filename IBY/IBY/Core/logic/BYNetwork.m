@@ -358,4 +358,72 @@ NSString* baseUrlByMode(BYNetMode mode)
     }];
 }
 
+#pragma mark - 顺手赚钱身份证上传
+
++ (void)postDataCompleteUrl:(NSString *)url
+                     params:(NSDictionary*)params
+                     finish:(void (^)(NSDictionary* data, BYError* error))finish
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [[BYNetwork sharedNetwork] refreshHeader:manager];
+    AFHTTPRequestOperation *operation = nil;
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"multipart/form-data"];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"----WebKitFormBoundarySSZQIdcardImageUpload"];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    operation = [manager POST:url
+                   parameters:params
+    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSString *key in params) {
+            id value = params[key];
+            if ([value isKindOfClass:[NSData class]]) {
+                [formData appendPartWithFileData:value
+                                            name:key
+                                        fileName:@"idcard.jpg"
+                                        mimeType:@"image/jpg"];
+//                                        mimeType:@"image/jpeg/jpg/png"];
+            }
+        }
+    }
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          if ([responseObject isKindOfClass:[NSDictionary class]] && [responseObject[@"state"] isEqualToString:@"SUCCESS"] ) {
+                              finish(responseObject ,nil);
+                              BYLog(@"BYNetWork:上传成功————————");
+                          }else {
+                              BYError *netErr = nil;
+                              if ([responseObject isKindOfClass:[NSDictionary class]] && responseObject[@"error"]) {
+//                                  netErr = makeTransferNetError(responseObject[@"error"]);
+                              }
+                              BYError *error = makeNetDecodeError(netErr);
+                              finish(nil,error);
+                          }
+                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                          BYLog(@"AF-POST-(文件)请求失败, error is %@", error);
+                          finish(nil,makeNetError(error));
+                      }];
+  
+    // 设置返回的数据解析方式
+    operation.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
+}
+
++ (void)postAppendParamsCompleteUrl:(NSString *)url
+                            params:(NSDictionary *)params
+                             finish:(void (^)(NSDictionary *, BYError *))finish
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [[BYNetwork sharedNetwork] refreshHeader:manager];
+    AFHTTPRequestOperation *operation = nil;
+
+    [manager POST:url
+       parameters:params
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              BYLog(@"responseObject-》：%@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            BYLog(@"responseObject-》：%@", error);
+        }];
+    
+}
+
 @end

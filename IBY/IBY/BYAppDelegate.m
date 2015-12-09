@@ -30,9 +30,7 @@
 //#import "RESideMenu.h"
 
 #import <CoreLocation/CoreLocation.h>
-
 #import <BaiduMapAPI/BMapKit.h>
-
 
 #import <EaseMobSDK/EaseMob.h>
 
@@ -78,7 +76,7 @@
      AppSecret：d4624c36b6795d1d99dcf0547af5443d
      */
     
-
+    
     _homeVC = [[BYHomeVC alloc] init];
     _homeNav = [BYNavVC nav:_homeVC title:@"顺手赚钱"];
 //    BYLeftMenuViewController *leftMenuViewController = [[BYLeftMenuViewController alloc] init];
@@ -90,7 +88,6 @@
 //    self.reSideMenu = sideMenuViewController;
     
 //    _window.rootViewController = self.reSideMenu;
-    
     _window.rootViewController = _homeNav;
     [_window makeKeyAndVisible];
 
@@ -111,7 +108,8 @@
     
     
     /*
-     以下代码注释原因: APNs注册和JPush注册重复，如若不注释，每次通知(费锁频)都会连续响两次(相隔不到0.5秒)，但实际只是一次通知
+     以下代码注释原因: APNs注册和JPush注册重复，如若不注释，
+     每次通知(非锁频)都会连续响两次(相隔不到0.5秒)，但实际只是一次通知
      */
 
 //    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"com.biyao.push.token"]);
@@ -129,10 +127,6 @@
     
     // JPush
     [self registerJPushWithOptions:launchOptions];
-    
-    
-    
-    
     
     return YES;
 }
@@ -212,7 +206,7 @@
 
 - (void)applicationWillResignActive:(UIApplication*)application
 {
-    [BMKMapView willBackGround];
+//    [BMKMapView willBackGround];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) ¬or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -242,9 +236,9 @@
     [BYAnalysis logEvent:@"App通用事件" action:@"进入前台" desc:nil];
     
     [[BYAppCenter sharedAppCenter] checkVersionInfo];
-    [BMKMapView didForeGround];
+//    [BMKMapView didForeGround];
     //可以手动设置cookies
-    [_homeVC reloadData];
+//    [_homeVC reloadData];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -267,7 +261,7 @@
           fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [[BYPushCenter sharedPushCenter] handleRemoteInfoWithApplication:application userinfo:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
+//    completionHandler(UIBackgroundFetchResultNewData);
     //[MBProgressHUD topShowTmpMessage:userInfo[@"aps"][@"alert"]];
 
     // JPush Required
@@ -292,9 +286,9 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSString* token = [NSString stringWithFormat:@"%@", deviceToken];
-    [iConsole log:@"设备token:%@",token];
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"com.biyao.push.token"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [iConsole log:@"APNs设备token:%@",token];
+//    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"com.biyao.push.token"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 //    [[BYAppCenter sharedAppCenter] uploadToken:token];
     
     // JPush Required
@@ -302,9 +296,12 @@
     BYLog(@"deviceToken:%@", deviceToken);
     
     // 将JPush的registrationID上传至自己的服务器
-//    NSString *jpushID = [APService registrationID];
     [iConsole log:@"JPush设备token:%@", [APService registrationID]];
     [[BYAppCenter sharedAppCenter] uploadToken:[APService registrationID]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[APService registrationID] forKey:@"com.biyao.push.token"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 
     
     //[MBProgressHUD topShowTmpMessage:token];

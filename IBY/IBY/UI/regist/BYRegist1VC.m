@@ -77,9 +77,10 @@
 
 - (IBAction)onProtocol:(id)sender
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_PROTOCOL];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_REGISTMY];
     BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:urlStr]];
-    webVC.useWebTitle = YES;
+//    webVC.useWebTitle = YES;
+    webVC.title = @"顺手赚钱服务协议";
     [self.navigationController pushViewController:webVC animated:YES];
 }
 

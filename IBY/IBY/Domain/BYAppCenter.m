@@ -218,7 +218,7 @@ NSString* const BYAppSessionInvalidNotification = @"com.biyao.app.sessionInvalid
 {
     
     int oldUid = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"com.biyao.push.last.uid"];
-    if (oldUid == [BYAppCenter sharedAppCenter].user.userID && [BYAppCenter sharedAppCenter].isLogin) {
+    if (oldUid == [BYAppCenter sharedAppCenter].user.userID || ![BYAppCenter sharedAppCenter].isLogin) {
         return;
     }
 //    NSString* pushTokenKey = [NSString stringWithFormat:@"com.biyao.push.token.uid:%d",[BYAppCenter sharedAppCenter].user.userID];//[@"com.biyao.push.token" append:token];
@@ -230,8 +230,8 @@ NSString* const BYAppSessionInvalidNotification = @"com.biyao.app.sessionInvalid
     if (!token) {
         token = [[NSUserDefaults standardUserDefaults] objectForKey:@"com.biyao.push.token"];
     }
-    token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+//    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (!token) {
         return;
@@ -242,6 +242,10 @@ NSString* const BYAppSessionInvalidNotification = @"com.biyao.app.sessionInvalid
             [[NSUserDefaults standardUserDefaults]setInteger:[BYAppCenter sharedAppCenter].user.userID forKey:@"com.biyao.push.last.uid"];
            // [[NSUserDefaults standardUserDefaults]setObject:@(YES) forKey:pushTokenKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            BYLog(@"userID：%d", [BYAppCenter sharedAppCenter].user.userID);
+            BYLog(@"token成功：%@", token);
+        }else {
+            BYLog(@"token失败：%@", token);
         }
     }];
 }

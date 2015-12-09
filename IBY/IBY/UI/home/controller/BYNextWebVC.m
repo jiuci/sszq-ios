@@ -62,8 +62,11 @@
     if (_urlStr.length == 0 || !_urlStr) {
         _urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_ERROR];
     }
-
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlStr]]];
+    
+    if (_isHiddenNavBar) {
+        self.navigationController.navigationBarHidden = YES;
+    }
 }
 
 
@@ -94,11 +97,12 @@
     }
     
     // 跳转上传身份证
-//    if ([requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_USER_SHARESFZ]]) {
+    if ([requestString isEqualToString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_USER_SHARESFZ]]) {
+        [self.navigationController pushViewController:[[BYIdcardVC alloc] init] animated:NO];
 //        [self presentViewController:[[BYIdcardVC alloc] init] animated:YES completion:^{
 //            nil;
 //        }];
-//    }
+    }
     
     return YES;
 }

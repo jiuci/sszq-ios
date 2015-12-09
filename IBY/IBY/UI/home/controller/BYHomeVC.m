@@ -224,7 +224,7 @@
     [self.mutiSwitch setSelectedAtIndex:0];
     
     if (![BYAppCenter sharedAppCenter].isLogin) {
-        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
+//        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
         __weak BYHomeVC *wself = self;
         BYLoginSuccessBlock successblock = ^(){
             [wself reloadData];
@@ -232,10 +232,11 @@
         // loginVC
         [self presentViewController:makeLoginNavFromHome(successblock, nil) animated:NO completion:nil];
         [self.navigationController popToRootViewControllerAnimated:NO];
-        [self reloadData];
+        
+//        [self reloadData];
     }
     
-//    [self reloadData];
+    [self reloadData];
     
 }
 -(void)viewDidAppear:(BOOL)animated {
@@ -280,12 +281,13 @@
     }
 
     if (![BYAppCenter sharedAppCenter].isLogin) {
-        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
+//        [MBProgressHUD topShowTmpMessage:@"  请先登录  "];
         return NO;
     }
     BYNextWebVC *nextWebVC = [[BYNextWebVC alloc] init];
     nextWebVC.urlStr = [request.URL absoluteString];
     nextWebVC.isJumpFromTapAction = YES;
+    nextWebVC.isHiddenNavBar = YES;
     [self.navigationController pushViewController:nextWebVC animated:YES];
     
     return NO;
@@ -342,7 +344,7 @@
         [btn1 setTitleColor:BYColorb768 forState:UIControlStateHighlighted|UIControlStateNormal];
         [_mutiSwitch addButtonWithBtn:btn1
                                handle:^(id sender) {
-//                                   [wself reloadData];
+                                   [wself reloadData];
                                    [wself.mutiSwitch setSelectedAtIndex:0];
                                }];
         

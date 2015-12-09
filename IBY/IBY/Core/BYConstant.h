@@ -47,8 +47,9 @@
 #define SSZQURL_WALLET  @"/share/money.html"
 #define SSZQURL_RANK    @"/share/ranklist.html"
 #define SSZQURL_SERVICE @"/service.html"
-#define SSZQURL_SERVICE_PROTOCOL        @"/Static/statichtml/registxy.html"
-#define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/registxy.html"
+#define SSZQURL_SERVICE_REGISTMY        @"/account/registmy.html"
+//#define SSZQURL_SERVICE_PROTOCOL        @"/Static/statichtml/registxy.html"
+//#define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/registxy.html"
 #define SSZQURL_USER_SHARESFZ           @"/share/sharesfz.html"
 #define SSZQURL_MINE    @"/account/mine"
 
@@ -69,6 +70,12 @@
 #define SSZQAPI_SMS_CHECKUSER       @"user/customer/MobilePreRegist"
 #define SSZQAPI_VCODE_GETVCODE      @"vcode/getvcode"
 #define SSZQAPI_VCODE_VALIDATEVCODE @"vcode/validatevcode"
+
+// 身份上传
+#define SSZQAPI_IDCARD_IMGUPLOAD    @"http://sf-share.admin.biyao.com/file/upload.do"
+#define SSZQAPI_IDCARD_INFOUPLOAD   @"http://finance.biyao.com/wxcash/putCasherInfo"
+
+
 
 // 以下未做替换
 #define SSZQURL_M_DetailDesign @""

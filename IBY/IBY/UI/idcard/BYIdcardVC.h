@@ -8,6 +8,10 @@
 
 #import "BYBaseVC.h"
 
-@interface BYIdcardVC : BYBaseVC
+@class BYIdcardService;
+
+@interface BYIdcardVC : BYBaseVC <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) BYIdcardService *idcardService;
 
 @end

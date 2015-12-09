@@ -58,7 +58,7 @@ static CGFloat bottomFontSize = 14;
 //                 sel:@selector(onAbout)];
     
     [self appendCell:nil
-               title:@"用户协议"
+               title:@"服务协议"
                  top:0
                  sel:@selector(onProtocol)];
     
@@ -118,9 +118,10 @@ static CGFloat bottomFontSize = 14;
 
 - (void)onProtocol
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_PROTOCOL];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_REGISTMY];
     BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:urlStr]];
-    webVC.useWebTitle = YES;
+//    webVC.useWebTitle = YES;
+    webVC.title = @"顺手赚钱服务协议";
     [self.navigationController pushViewController:webVC animated:YES];
 }
 @end

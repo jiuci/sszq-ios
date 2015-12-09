@@ -8,15 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		13FF256F69C9434CAC7AE441 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECBD60524B6486F8F402B01 /* libPods.a */; };
-		431B39B51C1022720033862C /* BYIdcardLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 431B39B41C1022720033862C /* BYIdcardLabel.m */; };
-		431B39B81C10228B0033862C /* BYIdcardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 431B39B71C10228B0033862C /* BYIdcardButton.m */; };
-		431B39BB1C10256D0033862C /* BYIdcardTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 431B39BA1C10256D0033862C /* BYIdcardTextField.m */; };
 		432BC0981C103E8400CB5031 /* BYPushWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 432BC0971C103E8400CB5031 /* BYPushWebVC.m */; };
 		43370C4D1C0376DA00B92DE2 /* BYWalletWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43370C4C1C0376DA00B92DE2 /* BYWalletWebVC.m */; };
 		433A72CF1C1015AC00BD7935 /* BYIdcardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 433A72CE1C1015AC00BD7935 /* BYIdcardVC.m */; };
 		435618B31C0E8BB500E39507 /* BYRankWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 435618B21C0E8BB500E39507 /* BYRankWebVC.m */; };
+		435BB6E61C15C01B00B80033 /* BYIdcardService.m in Sources */ = {isa = PBXBuildFile; fileRef = 435BB6E51C15C01B00B80033 /* BYIdcardService.m */; };
 		43695EAD1C058A15003AAAAB /* libPushSDK-1.8.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43695EAC1C058A15003AAAAB /* libPushSDK-1.8.8.a */; };
 		43695EAF1C058C9B003AAAAB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43695EAE1C058C9B003AAAAB /* PushConfig.plist */; };
+		436AD7FA1C17DEC900F5184F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 436AD7F91C17DEC900F5184F /* libicucore.dylib */; };
+		436AD7FC1C17E36700F5184F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 436AD7FB1C17E36700F5184F /* libicucore.tbd */; };
+		436AD8011C17EE7400F5184F /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = 436AD7FF1C17EE7400F5184F /* RegexKitLite.html */; };
+		436AD8021C17EE7400F5184F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 436AD8001C17EE7400F5184F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		43A29F081C118AD800943D9C /* BYRegistSucWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A29F071C118AD800943D9C /* BYRegistSucWebVC.m */; };
 		43A29F0B1C11BE7500943D9C /* BYNextWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A29F0A1C11BE7500943D9C /* BYNextWebVC.m */; };
 		43B1A1F81C0F186F003905A2 /* BYAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B1A1F61C0F186F003905A2 /* BYAboutVC.m */; };
@@ -85,7 +87,6 @@
 		F464EAC81A1C460200E2033D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EAC71A1C460200E2033D /* SystemConfiguration.framework */; };
 		F464EACA1A1C461700E2033D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EAC91A1C461700E2033D /* QuartzCore.framework */; };
 		F464EACC1A1C462A00E2033D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EACB1A1C462A00E2033D /* CoreTelephony.framework */; };
-		F464EACE1A1C464B00E2033D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EACD1A1C464B00E2033D /* libicucore.dylib */; };
 		F464EAD01A1C466000E2033D /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EACF1A1C466000E2033D /* libz.1.2.5.dylib */; };
 		F464EAD21A1C467300E2033D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EAD11A1C467300E2033D /* Security.framework */; };
 		F464EAD41A1C470B00E2033D /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F464EAD31A1C470B00E2033D /* libstdc++.dylib */; };
@@ -345,12 +346,6 @@
 
 /* Begin PBXFileReference section */
 		3ECBD60524B6486F8F402B01 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		431B39B31C1022720033862C /* BYIdcardLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYIdcardLabel.h; sourceTree = "<group>"; };
-		431B39B41C1022720033862C /* BYIdcardLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYIdcardLabel.m; sourceTree = "<group>"; };
-		431B39B61C10228B0033862C /* BYIdcardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYIdcardButton.h; sourceTree = "<group>"; };
-		431B39B71C10228B0033862C /* BYIdcardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYIdcardButton.m; sourceTree = "<group>"; };
-		431B39B91C10256D0033862C /* BYIdcardTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYIdcardTextField.h; sourceTree = "<group>"; };
-		431B39BA1C10256D0033862C /* BYIdcardTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYIdcardTextField.m; sourceTree = "<group>"; };
 		432BC0961C103E8400CB5031 /* BYPushWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYPushWebVC.h; sourceTree = "<group>"; };
 		432BC0971C103E8400CB5031 /* BYPushWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYPushWebVC.m; sourceTree = "<group>"; };
 		43370C4B1C0376DA00B92DE2 /* BYWalletWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYWalletWebVC.h; sourceTree = "<group>"; };
@@ -359,9 +354,16 @@
 		433A72CE1C1015AC00BD7935 /* BYIdcardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYIdcardVC.m; sourceTree = "<group>"; };
 		435618B11C0E8BB500E39507 /* BYRankWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYRankWebVC.h; sourceTree = "<group>"; };
 		435618B21C0E8BB500E39507 /* BYRankWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYRankWebVC.m; sourceTree = "<group>"; };
+		435BB6E41C15C01B00B80033 /* BYIdcardService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYIdcardService.h; sourceTree = "<group>"; };
+		435BB6E51C15C01B00B80033 /* BYIdcardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYIdcardService.m; sourceTree = "<group>"; };
 		43695EAB1C058A15003AAAAB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		43695EAC1C058A15003AAAAB /* libPushSDK-1.8.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.8.a"; sourceTree = "<group>"; };
 		43695EAE1C058C9B003AAAAB /* PushConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = PushConfig.plist; sourceTree = "<group>"; };
+		436AD7F91C17DEC900F5184F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = "../../程磊iOS/开源源码/0 APPLESDC/libicucore.dylib"; sourceTree = "<group>"; };
+		436AD7FB1C17E36700F5184F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		436AD7FE1C17EE7400F5184F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		436AD7FF1C17EE7400F5184F /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
+		436AD8001C17EE7400F5184F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		43A29F061C118AD800943D9C /* BYRegistSucWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYRegistSucWebVC.h; sourceTree = "<group>"; };
 		43A29F071C118AD800943D9C /* BYRegistSucWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYRegistSucWebVC.m; sourceTree = "<group>"; };
 		43A29F091C11BE7500943D9C /* BYNextWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNextWebVC.h; sourceTree = "<group>"; };
@@ -995,6 +997,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436AD7FC1C17E36700F5184F /* libicucore.tbd in Frameworks */,
+				436AD7FA1C17DEC900F5184F /* libicucore.dylib in Frameworks */,
 				F464EAD21A1C467300E2033D /* Security.framework in Frameworks */,
 				FE14D68519AC2289006B0E48 /* CoreGraphics.framework in Frameworks */,
 				F464EAC81A1C460200E2033D /* SystemConfiguration.framework in Frameworks */,
@@ -1018,7 +1022,6 @@
 				F4C4155F1A6817DA00F121B3 /* libz.dylib in Frameworks */,
 				FE3A9B3C1BC7B1F5008835C1 /* libopencore-amrnb.a in Frameworks */,
 				F464EAD01A1C466000E2033D /* libz.1.2.5.dylib in Frameworks */,
-				F464EACE1A1C464B00E2033D /* libicucore.dylib in Frameworks */,
 				F464EACC1A1C462A00E2033D /* CoreTelephony.framework in Frameworks */,
 				FE3A9B3D1BC7B1F5008835C1 /* libopencore-amrwb.a in Frameworks */,
 				F464EACA1A1C461700E2033D /* QuartzCore.framework in Frameworks */,
@@ -1045,25 +1048,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		431B39B21C10222F0033862C /* view */ = {
-			isa = PBXGroup;
-			children = (
-				431B39B31C1022720033862C /* BYIdcardLabel.h */,
-				431B39B41C1022720033862C /* BYIdcardLabel.m */,
-				431B39B61C10228B0033862C /* BYIdcardButton.h */,
-				431B39B71C10228B0033862C /* BYIdcardButton.m */,
-				431B39B91C10256D0033862C /* BYIdcardTextField.h */,
-				431B39BA1C10256D0033862C /* BYIdcardTextField.m */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
 		433A72CB1C10153000BD7935 /* idcard */ = {
 			isa = PBXGroup;
 			children = (
 				433A72CD1C1015AC00BD7935 /* BYIdcardVC.h */,
 				433A72CE1C1015AC00BD7935 /* BYIdcardVC.m */,
-				431B39B21C10222F0033862C /* view */,
 			);
 			path = idcard;
 			sourceTree = "<group>";
@@ -1071,6 +1060,8 @@
 		433A72CC1C10155F00BD7935 /* idcard */ = {
 			isa = PBXGroup;
 			children = (
+				435BB6E41C15C01B00B80033 /* BYIdcardService.h */,
+				435BB6E51C15C01B00B80033 /* BYIdcardService.m */,
 			);
 			path = idcard;
 			sourceTree = "<group>";
@@ -1082,6 +1073,16 @@
 				43695EAC1C058A15003AAAAB /* libPushSDK-1.8.8.a */,
 			);
 			path = JPush;
+			sourceTree = "<group>";
+		};
+		436AD7FD1C17EE7400F5184F /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				436AD7FE1C17EE7400F5184F /* RegexKitLite.h */,
+				436AD7FF1C17EE7400F5184F /* RegexKitLite.html */,
+				436AD8001C17EE7400F5184F /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
 			sourceTree = "<group>";
 		};
 		CC3D2E0219BFF8B1000E0E14 /* MJExtension */ = {
@@ -1894,6 +1895,8 @@
 		FE14D68119AC2289006B0E48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				436AD7FB1C17E36700F5184F /* libicucore.tbd */,
+				436AD7F91C17DEC900F5184F /* libicucore.dylib */,
 				F4D910B11B57D1B900A5BEB9 /* OpenGLES.framework */,
 				F4D910AF1B57D1A000A5BEB9 /* CoreLocation.framework */,
 				F4D910AD1B57D16800A5BEB9 /* BaiduMapAPI.framework */,
@@ -2059,6 +2062,7 @@
 		FE14D6C119AC333E006B0E48 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				436AD7FD1C17EE7400F5184F /* RegexKitLite */,
 				43695EAA1C058A15003AAAAB /* JPush */,
 				FE3A9B291BC7B1F5008835C1 /* VoiceConvert */,
 				FE3A9B0D1BC7B146008835C1 /* DeviceUtil */,
@@ -2634,6 +2638,7 @@
 				FE14D68D19AC2289006B0E48 /* InfoPlist.strings in Resources */,
 				F48D0E5D1AE8AA110080DA22 /* BYFeedbackVC.xib in Resources */,
 				43695EAF1C058C9B003AAAAB /* PushConfig.plist in Resources */,
+				436AD8011C17EE7400F5184F /* RegexKitLite.html in Resources */,
 				F4C9AB041A7629D200325A38 /* WebViewJavascriptBridge.js.txt in Resources */,
 				43B1A1F91C0F186F003905A2 /* BYAboutVC.xib in Resources */,
 				F4E0076F1B0F08E100438FD5 /* BYReSetPasswordVC.xib in Resources */,
@@ -2711,7 +2716,6 @@
 				F4E2D6321B71FCAD00E18CA8 /* BYUserProfileVC.m in Sources */,
 				FE3A9A7B1BC7AD43008835C1 /* EMChatViewBaseCell.m in Sources */,
 				CC6AD03119D11684001FB4EA /* BYPrice.m in Sources */,
-				431B39B81C10228B0033862C /* BYIdcardButton.m in Sources */,
 				FE3A9AF81BC7AE9C008835C1 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				CC957E3F19C16FAA000700DE /* BYNavVC.m in Sources */,
 				FE3A9B001BC7AE9C008835C1 /* PSTCollectionViewUpdateItem.m in Sources */,
@@ -2724,6 +2728,7 @@
 				CC771F8E19CAE06000E11BAE /* BYUserService.m in Sources */,
 				CC3D2E1D19BFF8B1000E0E14 /* NSObject+MJKeyValue.m in Sources */,
 				43370C4D1C0376DA00B92DE2 /* BYWalletWebVC.m in Sources */,
+				436AD8021C17EE7400F5184F /* RegexKitLite.m in Sources */,
 				FE3A9B231BC7B147008835C1 /* EMAudioRecorderUtil.m in Sources */,
 				FE3A9AEA1BC7AE9C008835C1 /* EMSDWebImageDecoder.m in Sources */,
 				F496C3911B317E7B00E503D8 /* BYUserEngine.m in Sources */,
@@ -2903,7 +2908,6 @@
 				FE3A9A7C1BC7AD43008835C1 /* EMChatViewCell.m in Sources */,
 				F426180F1A2C59E30076B273 /* NSData+base64.m in Sources */,
 				FE3A9AFE1BC7AE9C008835C1 /* PSTCollectionViewItemKey.m in Sources */,
-				431B39B51C1022720033862C /* BYIdcardLabel.m in Sources */,
 				FE3A9AE61BC7AE9C008835C1 /* MWZoomingScrollView.m in Sources */,
 				F48CF4091A548E3B00EE4EF4 /* BYTestVC1.m in Sources */,
 				CC771F8C19CAE06000E11BAE /* BYCategoryService.m in Sources */,
@@ -2953,9 +2957,9 @@
 				F4CDB3791A320C600053AED0 /* BYLinearScrollView.m in Sources */,
 				F46F93851A0B24AC0088C100 /* BYMaterial.m in Sources */,
 				F4607AE61A10585800255B57 /* NSMutableDictionaryExtend.m in Sources */,
-				431B39BB1C10256D0033862C /* BYIdcardTextField.m in Sources */,
 				F4E6858719EE818400237412 /* BYMonitorView.m in Sources */,
 				F4888A2F1A6D114A0056427E /* SAKShareConfig.m in Sources */,
+				435BB6E61C15C01B00B80033 /* BYIdcardService.m in Sources */,
 				F4DB83401B6605910083F9B4 /* BYMineCell.m in Sources */,
 				F426180E1A2C59E30076B273 /* CommonFunc.m in Sources */,
 				F4C575921A22DCD3005D4848 /* BYBarButtonItem.m in Sources */,
