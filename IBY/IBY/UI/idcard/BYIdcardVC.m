@@ -38,6 +38,9 @@ static CGFloat bigTipsFontSize = 16;
 static CGFloat smallTipsFontSize = 12;
 static CGFloat leftSpace = 37;
 
+static CGFloat imgWidth = 750;
+static CGFloat imgHeight;
+
 
 @implementation BYIdcardVC
 
@@ -50,6 +53,7 @@ static CGFloat leftSpace = 37;
     
     [self setupLeftBackItem];
     [self setupUI];
+    [self setViewAction];
 }
 
 #pragma mark - UI
@@ -131,7 +135,9 @@ static CGFloat leftSpace = 37;
     CGFloat imgView_y = _uploadButton.bottom + 10;
     _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftSpace, imgView_y, textField_w, textField_w * 0.6)];
     _imgView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.5];
-    _imgView.contentMode = UIViewContentModeScaleAspectFit;
+    _imgView.contentMode = UIViewContentModeScaleAspectFill;
+    _imgView.clipsToBounds = YES;
+    _imgView.image = [UIImage imageNamed:@"img_idcard"];
     [self.view addSubview:_imgView];
     
     
@@ -144,7 +150,7 @@ static CGFloat leftSpace = 37;
     
     _tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftSpace, proLabel_y, textField_w, label_h * 2)];
     _tipsLabel.numberOfLines = 0;
-    _tipsLabel.text = @"请务必上传与所填写姓名、身份证号一直的身份证正面照片，且身份证上的信息清晰可见";
+    _tipsLabel.text = @"请务必上传与所填写姓名、身份证号一致的身份证正面照片，且身份证上的信息清晰可见";
     _tipsLabel.font = [UIFont systemFontOfSize:smallTipsFontSize];
     _tipsLabel.textColor = BYColor666;
     [self.view addSubview:_tipsLabel];
@@ -170,12 +176,10 @@ static CGFloat leftSpace = 37;
                 action:@selector(backBtnAction:)
       forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-//    self.navigationItem.backBarButtonItem = backItem;
     self.navigationItem.leftBarButtonItem = backItem;
 }
 
 - (void)backBtnAction:(UIButton *)backBtn {
-    BYLog(@"backBtnAction--------");
     for (id vc in self.navigationController.viewControllers) {
         if ([vc isMemberOfClass:[BYNextWebVC class]]) {
             [self.navigationController popToViewController:vc animated:NO];
@@ -183,53 +187,129 @@ static CGFloat leftSpace = 37;
     }
 }
 
+- (void)setViewAction {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(tapGestureAction:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+- (void)tapGestureAction:(UITapGestureRecognizer *)gesture {
+    [self.view becomeFirstResponder];
+    [self.view endEditing:YES];
+}
+
 
 #pragma mark - 选择照片
 - (void)selectIdcardImg:(UIButton *)uploadBtn {
     BYLog(@"选择身份证");
-    UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
     
-    /*
-     UIImagePickerControllerSourceTypePhotoLibrary, 显示所有文件夹
-     UIImagePickerControllerSourceTypeCamera,   调用系统摄像头
-     UIImagePickerControllerSourceTypeSavedPhotosAlbum 显示内置文件夹
-     */
-    pickVC.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    pickVC.delegate = self;
-    [self presentViewController:pickVC animated:YES completion:nil];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        UIImagePickerController *imagePicker = [UIImagePickerController new];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+//
+//    UIImagePickerController *pickVC = [[UIImagePickerController alloc] init];
+//    
+//    /*
+//     UIImagePickerControllerSourceTypePhotoLibrary, 显示所有文件夹
+//     UIImagePickerControllerSourceTypeCamera,   调用系统摄像头
+//     UIImagePickerControllerSourceTypeSavedPhotosAlbum 显示内置文件夹
+//     */
+//    pickVC.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    pickVC.delegate = self;
+//    [self presentViewController:pickVC animated:YES completion:nil];
 }
+
+- (BOOL) isPhotoLibraryAvailable {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (UIImage *)editedImage:(UIImage *)img {
+    UIImage *lastImg;
+    if (img.size.width> imgWidth && img.size.height > imgWidth) {
+        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, imgWidth)];
+        return lastImg;
+    } else if(img.size.width > imgWidth){
+        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, img.size.height)];
+        return lastImg;
+    }else{
+        lastImg = [img image:img byScalingToSize:CGSizeMake(img.size.width, imgWidth)];
+        return lastImg;
+    }
+}
+
+
 
 #pragma mark <UIImagePickerControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:@"public.image"]) {
-        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-        self.imgView.image = img;
+    [MBProgressHUD topShowTmpMessage:@"头像上传中"];
+    UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    imgHeight = imgWidth * 0.6;
+    if (img.size.width > imgWidth || img.size.height > imgHeight) {
+        img = [self editedImage:img];
+    }else{
     }
-    NSData *imgFile;
-    if (UIImagePNGRepresentation(self.imgView.image)) {
-        imgFile = UIImagePNGRepresentation(self.imgView.image);
-    }else {
-        imgFile = UIImageJPEGRepresentation(self.imgView.image, 1.0);
-        if (imgFile.length > 1000 * 1000) {
-            CGFloat compressionQuality = 500 * 1000 / imgFile.length;
-            imgFile = UIImageJPEGRepresentation(self.imgView.image, compressionQuality);
-        }
-    }
-
+    
+    NSData *imgFile = UIImagePNGRepresentation(img);
     [picker dismissViewControllerAnimated:YES completion:^{
         BYLog(@"图片上传中");
         [_idcardService uploadIdcardImg:imgFile finsh:^(NSDictionary *data, BYError *error) {
             if (!error) {
                 BYLog(@"上传成功");
                 BYLog(@"%@", data);
+//                self.imgView.image = img;
+//                [self.imgView setImage:img];
+                UIImage *myimg = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+                [self.imgView setImage:myimg];
                 _identityUrl = data[@"url"];
+                [MBProgressHUD topShowTmpMessage:@"身份证图片上传成功"];
             }else {
                 BYLog(@"上传失败");
             }
         }];
     }];
+
+    
+//    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+//    if ([mediaType isEqualToString:@"public.image"]) {
+//        UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        self.imgView.image = img;
+//    }
+//    NSData *imgFile;
+//    if (UIImagePNGRepresentation(self.imgView.image)) {
+//        imgFile = UIImagePNGRepresentation(self.imgView.image);
+//    }else {
+//        imgFile = UIImageJPEGRepresentation(self.imgView.image, 1.0);
+//        if (imgFile.length > 1000 * 1000) {
+//            CGFloat compressionQuality = 500 * 1000 / imgFile.length;
+//            imgFile = UIImageJPEGRepresentation(self.imgView.image, compressionQuality);
+//        }
+//    }
+//
+//    [picker dismissViewControllerAnimated:YES completion:^{
+//        BYLog(@"图片上传中");
+//        [_idcardService uploadIdcardImg:imgFile finsh:^(NSDictionary *data, BYError *error) {
+//            if (!error) {
+//                BYLog(@"上传成功");
+//                BYLog(@"%@", data);
+//                _identityUrl = data[@"url"];
+//            }else {
+//                BYLog(@"上传失败");
+//            }
+//        }];
+//    }];
 }
 
 
@@ -249,7 +329,8 @@ static CGFloat leftSpace = 37;
                                             identityUrl:_identityUrl
                                                   finsh:^(NSDictionary *data, BYError *error) {
                                                       if ([data[@"code"] integerValue] == 1) {
-                                                          BYLog(@"身份证信息上传成功");
+                                                          BYLog(@"身份证信息上传成功--data:%@", data);
+                                                          [MBProgressHUD topShowTmpMessage:@"提交信息成功"];
                                                           for (id vc in wself.navigationController.viewControllers) {
                                                               if ([vc isMemberOfClass:[BYNextWebVC class]]) {
                                                                   [wself.navigationController popToViewController:vc animated:NO];
@@ -257,7 +338,7 @@ static CGFloat leftSpace = 37;
                                                           }
                                                           
                                                       }else {
-                                                          BYLog(@"身份证信息上传失败");
+                                                          BYLog(@"身份证信息上传失败--error:%@", error);
                                                           [MBProgressHUD topShowTmpMessage:@"提交信息失败"];
                                                       }
                                                   }];

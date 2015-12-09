@@ -87,6 +87,7 @@
                                     params:params
                                     finish:^(NSDictionary *data, BYError *error) {
                                         BYLog(@"data:%@", data);
+                                        finished (data, error);
                                     }];
 }
 

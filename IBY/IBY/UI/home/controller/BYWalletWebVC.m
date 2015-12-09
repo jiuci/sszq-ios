@@ -37,9 +37,6 @@
     
     _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 46)];
     _webView.delegate = self;
-    // 原必要：http://m.biyao.com/share/money.html
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_WALLET]];
-    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
     [self.view addSubview:_webView];
 
 }
@@ -49,6 +46,7 @@
     [self.mutiSwitch setSelectedAtIndex:1];
 //    self.navigationItem.hidesBackButton = YES;
     [self.navigationController setNavigationBarHidden:YES];
+    [self reloadData];
 }
 
 

@@ -33,6 +33,15 @@
     return nav;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.delegate = self;
+    }
+    return self;
+}
+
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {

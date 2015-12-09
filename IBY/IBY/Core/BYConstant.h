@@ -49,7 +49,7 @@
 #define SSZQURL_SERVICE @"/service.html"
 #define SSZQURL_SERVICE_REGISTMY        @"/account/registmy.html"
 //#define SSZQURL_SERVICE_PROTOCOL        @"/Static/statichtml/registxy.html"
-//#define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/registxy.html"
+#define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/regvcerror.html"
 #define SSZQURL_USER_SHARESFZ           @"/share/sharesfz.html"
 #define SSZQURL_MINE    @"/account/mine"
 

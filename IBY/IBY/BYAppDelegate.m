@@ -77,8 +77,39 @@
      */
     
     
+//    _homeNav = [[BYNavVC alloc] init];
+//    _homeNav.view.backgroundColor = [UIColor redColor];
+//    _homeNav.title = @"顺手赚钱";
+//    [_homeNav.navigationBar setBackgroundImage:[[UIImage imageNamed:@"bg_nav"] resizableImage] forBarMetrics:UIBarMetricsDefault];
+//    NSDictionary* dict = @{ NSForegroundColorAttributeName : HEXCOLOR(0xffffff),
+//                            NSFontAttributeName : Font(16) };
+//    _homeNav.navigationBar.titleTextAttributes = dict;
+//
+//    if ([BYAppCenter sharedAppCenter].isLogin) {
+//        _homeVC = [[BYHomeVC alloc] init];
+//        _homeNav.rootController = _homeVC;
+//    }else {
+//        BYLoginVC *loginVC = [BYLoginVC sharedLoginVC];
+//        loginVC.view.backgroundColor = [UIColor greenColor];
+//        loginVC.showThirdPartyLogin = NO;
+//        loginVC.isHomeLogin = YES;
+////        BYLoginSuccessBlock *sucBlock =
+//        
+//        __weak BYNavVC *wHomeNav = _homeNav;
+//        loginVC.successBlk = ^{
+//            _homeVC = [[BYHomeVC alloc] init];
+//            wHomeNav.rootController = _homeVC;
+//        };
+//        loginVC.cancelBlk = nil;
+//        _homeNav.rootController = loginVC;
+//    }
+//    
+    
+    
+    
     _homeVC = [[BYHomeVC alloc] init];
     _homeNav = [BYNavVC nav:_homeVC title:@"顺手赚钱"];
+    
 //    BYLeftMenuViewController *leftMenuViewController = [[BYLeftMenuViewController alloc] init];
 //    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:_homeNav
 //                                                                    leftMenuViewController:leftMenuViewController];
@@ -129,6 +160,10 @@
     [self registerJPushWithOptions:launchOptions];
     
     return YES;
+}
+
+- (void)showLoginView {
+    
 }
 
 

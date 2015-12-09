@@ -409,7 +409,7 @@ NSString* baseUrlByMode(BYNetMode mode)
 
 + (void)postAppendParamsCompleteUrl:(NSString *)url
                             params:(NSDictionary *)params
-                             finish:(void (^)(NSDictionary *, BYError *))finish
+                             finish:(void (^)(NSDictionary *data, BYError *error))finish
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -419,9 +419,9 @@ NSString* baseUrlByMode(BYNetMode mode)
     [manager POST:url
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              BYLog(@"responseObject-》：%@", responseObject);
+              finish (responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            BYLog(@"responseObject-》：%@", error);
+            finish (nil, makeNetError(error));
         }];
     
 }

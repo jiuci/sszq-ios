@@ -117,7 +117,7 @@
 }
 - (IBAction)onSMScodeHelper:(id)sender
 {
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_REGISTMY];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
     BYBaseWebVC* webVC = [[BYBaseWebVC alloc] initWithURL:[NSURL URLWithString:urlStr]];
 //    webVC.useWebTitle = YES;
     webVC.title = @"顺手赚钱服务协议";
