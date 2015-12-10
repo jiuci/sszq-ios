@@ -276,7 +276,10 @@
     }
     
     if (![BYAppCenter sharedAppCenter].isNetConnected) {
-        [MBProgressHUD topShowTmpMessage:@"网络异常，请检查您的网络"];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"html"];
+        NSURLRequest *fileUrlRequest = [NSURLRequest requestWithURL:[NSURL fileURLWithPath:filePath]];
+        [_shareWebView loadRequest:fileUrlRequest];
+//        [MBProgressHUD topShowTmpMessage:@"网络异常，请检查您的网络"];
         return NO;
     }
 

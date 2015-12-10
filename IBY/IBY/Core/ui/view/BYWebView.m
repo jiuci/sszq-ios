@@ -102,7 +102,8 @@
                 //构造SendAuthReq结构体
                 SendAuthReq* req =[[SendAuthReq alloc ] init ];
                 req.scope = @"snsapi_base,snsapi_userinfo" ;
-                req.state = @"com.biyao.fu" ;
+//                req.state = @"com.biyao.fu" ;
+                req.state = @"com.biyao.sszq" ;
                 //第三方向微信终端发送一个SendAuthReq消息结构
                 [WXApi sendReq:req];
             }

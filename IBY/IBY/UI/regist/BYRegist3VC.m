@@ -57,15 +57,7 @@
     }];
     self.autoHideKeyboard = YES;
     self.btnNext.enabled = NO;
-    
-    [self setupTestBtn];
 }
-
-- (void)setupTestBtn {
-//    _testBtn = [UIButton buttonWith]
-}
-
-
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -90,12 +82,17 @@
 //    NSString* smsCode = self.registService.verifyCode;
     [MBProgressHUD topShow:@"注册中..."];
     [self.registService registByUser:user pwd:pwd finsh:^(BOOL success, BYError* error) {
-//        [MBProgressHUD topHide];
         
+        [MBProgressHUD topHide];
+        BYLog(@"注册完成返回值:success:%d, error:%@", success, error);
         if (success) {
             BYHomeVC* homeVC = ((BYAppDelegate*)[UIApplication sharedApplication].delegate).homeVC;
-            BYRegistSucWebVC *registSucWebVC = [[BYRegistSucWebVC alloc] init];
-            [homeVC presentViewController:registSucWebVC animated:YES completion:nil];
+//            BYRegistSucWebVC *registSucWebVC = [[BYRegistSucWebVC alloc] init];
+//            [homeVC presentViewController:registSucWebVC animated:YES completion:nil];
+//            [self.navigationController pushViewController:registSucWebVC animated:NO];
+//            [self.navigationController popToRootViewControllerAnimated:NO];
+            [homeVC.navigationController popToRootViewControllerAnimated:NO];
+            BYLog(@"弹出注册成功页面");
         }
 
         
@@ -120,6 +117,16 @@
                              completion:^{
                                  
                              }];
+
+//                            BYLog(@"-----万恶的dismissViewControllerAnimated");
+//                            __weak BYHomeVC* wHomeVC = ((BYAppDelegate*)[UIApplication sharedApplication].delegate).homeVC;
+//                            [self.navigationController
+//                             dismissViewControllerAnimated:YES
+//                             completion:^{
+//                                 BYRegistSucWebVC *registSucWebVC = [[BYRegistSucWebVC alloc] init];
+//                                 [wHomeVC.navigationController pushViewController:registSucWebVC animated:NO];
+//                                 BYLog(@"弹出注册成功页面");
+//                             }];
                         }else{
                             [self.navigationController popToViewController:bylogin animated:YES];
                                 [MBProgressHUD topHide];

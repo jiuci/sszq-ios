@@ -57,17 +57,20 @@
 //sina
 - (NSString*)sinaAccessToken
 {
-    return @"28ad8e9aa163ac8c7e874529997e8375";
+//    return @"28ad8e9aa163ac8c7e874529997e8375";
+    return @"";
 }
 
 - (NSString*)sinaAppKey
 {
-    return @"3976348807";
+//    return @"3976348807";
+    return @"";
 }
 
 - (NSString*)sinaClientKey
 {
-    return @"wb3976348807";
+//    return @"wb3976348807";
+    return @"";
 }
 
 @end

@@ -19,6 +19,7 @@
 		436AD7FC1C17E36700F5184F /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 436AD7FB1C17E36700F5184F /* libicucore.tbd */; };
 		436AD8011C17EE7400F5184F /* RegexKitLite.html in Resources */ = {isa = PBXBuildFile; fileRef = 436AD7FF1C17EE7400F5184F /* RegexKitLite.html */; };
 		436AD8021C17EE7400F5184F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 436AD8001C17EE7400F5184F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		439286051C191BFE00B33CB1 /* error.html in Resources */ = {isa = PBXBuildFile; fileRef = 439286041C191BFE00B33CB1 /* error.html */; };
 		43A29F081C118AD800943D9C /* BYRegistSucWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A29F071C118AD800943D9C /* BYRegistSucWebVC.m */; };
 		43A29F0B1C11BE7500943D9C /* BYNextWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A29F0A1C11BE7500943D9C /* BYNextWebVC.m */; };
 		43B1A1F81C0F186F003905A2 /* BYAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B1A1F61C0F186F003905A2 /* BYAboutVC.m */; };
@@ -364,6 +365,7 @@
 		436AD7FE1C17EE7400F5184F /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		436AD7FF1C17EE7400F5184F /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
 		436AD8001C17EE7400F5184F /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		439286041C191BFE00B33CB1 /* error.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = error.html; sourceTree = "<group>"; };
 		43A29F061C118AD800943D9C /* BYRegistSucWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYRegistSucWebVC.h; sourceTree = "<group>"; };
 		43A29F071C118AD800943D9C /* BYRegistSucWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYRegistSucWebVC.m; sourceTree = "<group>"; };
 		43A29F091C11BE7500943D9C /* BYNextWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYNextWebVC.h; sourceTree = "<group>"; };
@@ -1290,6 +1292,7 @@
 		CC957E5019C1788C000700DE /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				439286041C191BFE00B33CB1 /* error.html */,
 				FED380091B8C5EA200A02FEF /* index.html */,
 				CC957E9E19C2FB45000700DE /* BYHomeVC.h */,
 				CC957E9F19C2FB45000700DE /* BYHomeVC.m */,
@@ -2631,6 +2634,7 @@
 				F43114031A2C20D600FCBE45 /* Images.xcassets in Resources */,
 				F4159D7D19F247D300126BDF /* appinfo.plist in Resources */,
 				F4C4156E1A6818FE00F121B3 /* read_me.txt in Resources */,
+				439286051C191BFE00B33CB1 /* error.html in Resources */,
 				FE3A9B051BC7AE9C008835C1 /* MWPhotoBrowser.bundle in Resources */,
 				F4C77D101A2DA6F1005EADA0 /* res.xcassets in Resources */,
 				F4E0076B1B0F08E100438FD5 /* BYForgetPasswordVC.xib in Resources */,

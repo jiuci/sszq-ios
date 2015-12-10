@@ -52,6 +52,7 @@
 #define SSZQURL_SERVICE_SMSCODEHELPER   @"/Static/statichtml/regvcerror.html"
 #define SSZQURL_USER_SHARESFZ           @"/share/sharesfz.html"
 #define SSZQURL_MINE    @"/account/mine"
+#define SSZQURL_ACCOUNT_REGISTSUC       @"/account/sfregistSuc"
 
 //    NSString *urlStr = [NSString stringWithFormat:@"%@%@", SSZQURL_BASE, SSZQURL_SERVICE_SMSCODEHELPER];
 
@@ -74,6 +75,8 @@
 // 身份上传
 #define SSZQAPI_IDCARD_IMGUPLOAD    @"http://sf-share.admin.biyao.com/file/upload.do"
 #define SSZQAPI_IDCARD_INFOUPLOAD   @"http://finance.biyao.com/wxcash/putCasherInfo"
+#define SSZQAPI_IDCARD_GETINFO      @"http://finance.biyao.com/share/getcasherinfo"  // 获得已上传身份信息
+
 
 
 

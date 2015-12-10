@@ -40,7 +40,7 @@ static CGFloat bottomFontSize = 14;
     [self.view addSubview:_bodyView];
     
     _logoImageView = [[UIImageView alloc]init];
-    UIImage * logoImage = [UIImage imageNamed:@"icon_usercenter_logo"];
+    UIImage * logoImage = [UIImage imageNamed:@"icon_aboutus_logo"];
     [self.view addSubview:_logoImageView];
     _logoImageView.image = logoImage;
     _logoImageView.frame = CGRectMake(0, 0, logoImage.size.width, logoImage.size.height);

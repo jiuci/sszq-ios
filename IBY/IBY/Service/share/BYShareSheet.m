@@ -152,7 +152,7 @@
                                             detailURL:[BYURL_M_DetailDesign appendNum:_designId]
                                            thumbImage:self.image
                                              thumbURL:self.imgPath
-                                                 logo:[UIImage imageNamed:@"icon_usercenter_logo"]];
+                                                 logo:[UIImage imageNamed:@"icon_login_logo"]];
     [SAKShareEngine share:unit from:self.fromVC willShare:^{
         BYLog(@"will shared");
     } didShare:^(NSError* error) {

@@ -77,12 +77,25 @@
 
     NSString* url = SSZQAPI_IDCARD_INFOUPLOAD;
     
+//    NSString *encodedName = [name stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSData *nsdata = [name dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64EncodedName = [nsdata base64EncodedStringWithOptions:0];
+    
+//    NSString* string2 = [string1 stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSString* string1 = [string2 stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSString *encodeString = [self encodeString:name];
+    
     NSDictionary* params = @{@"userId": userId,
-                             @"name": name,
+                             @"name": base64EncodedName,
                              @"code": code,
+                             @"source": @(3),
                              @"identityUrl": identityUrl};
     
+//    [param dataUsingEncoding:NSUTF8StringEncoding];
     
+//    NSData *dataParams = [params dataUsingEncoding:NSUTF8StringEncoding];
     [BYNetwork postAppendParamsCompleteUrl:url
                                     params:params
                                     finish:^(NSDictionary *data, BYError *error) {
@@ -90,6 +103,54 @@
                                         finished (data, error);
                                     }];
 }
+
+
+
+
+
+
+- (void)getIdcardIfonWithSource:(NSNumber *)source
+                          finsh:(void (^)(NSDictionary *data, BYError* error))finished {
+    
+    NSString *url = SSZQAPI_IDCARD_GETINFO;
+    NSString *userId = [NSString stringWithFormat:@"%d", [BYAppCenter sharedAppCenter].user.userID];
+    NSDictionary* params = @{@"userId": userId,
+                             @"source": source};
+
+    [BYNetwork postAppendParamsCompleteUrl:url
+                                    params:params
+                                    finish:^(NSDictionary *data, BYError *error) {
+                                        BYLog(@"data:%@", data);
+                                        finished (data, error);
+                                    }];
+}
+
+#pragma mark - 
+- (NSString*)encodeString:(NSString*)unencodedString{
+    
+    // CharactersToBeEscaped = @":/?&=;+!@#$()~',*";
+    // CharactersToLeaveUnescaped = @"[].";
+    
+    NSString *encodedString = (NSString *)
+    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (CFStringRef)unencodedString,
+                                                              NULL,
+                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                              kCFStringEncodingUTF8));
+    
+    return encodedString;
+}
+
+//URLDEcode
+-(NSString *)decodeString:(NSString*)encodedString
+
+{
+    //NSString *decodedString = [encodedString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
+    
+    NSString *decodedString  = (__bridge_transfer NSString *)CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,                                  (__bridge CFStringRef)encodedString, CFSTR(""),                             CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+    return decodedString;
+}
+
 
 
 @end

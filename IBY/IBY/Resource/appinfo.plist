@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>appName</key>
-	<string>biyao</string>
+	<string>sszq</string>
 	<key>appVersion</key>
-	<string>2.2.6</string>
+	<string>1.0.2</string>
 	<key>channel</key>
-	<string>ios_biyao</string>
+	<string>ios_sszq</string>
 	<key>platform</key>
 	<string>iOS</string>
 	<key>numVersion</key>
-	<integer>32</integer>
+	<integer>1</integer>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

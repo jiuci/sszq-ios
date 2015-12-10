@@ -114,7 +114,7 @@
                                                 detailURL:url
                                                thumbImage:willShareImg
                                                  thumbURL:imgUrl
-                                                     logo:[UIImage imageNamed:@"icon_usercenter_logo"]];
+                                                     logo:[UIImage imageNamed:@"icon_login_logo"]];
         [SAKShareEngine share:unit from:fromVC willShare:^{
             BYLog(@"will shared");
         } didShare:^(NSError* error) {
@@ -127,11 +127,11 @@
         [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imgUrl] options:SDWebImageDownloaderUseNSURLCache progress:nil completed:^(UIImage* image, NSData* data, NSError* error, BOOL finished) {
             [MBProgressHUD topHide];
             
-            UIImage *willShareImg = image ? image : [UIImage imageNamed:@"icon_usercenter_logo"];
+            UIImage *willShareImg = image ? image : [UIImage imageNamed:@"icon_login_logo"];
             doShare(willShareImg);
         }];
     }else{
-        UIImage *willShareImg = [UIImage imageNamed:@"icon_usercenter_logo"];
+        UIImage *willShareImg = [UIImage imageNamed:@"icon_login_logo"];
         doShare(willShareImg);
     }
     

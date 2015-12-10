@@ -12,15 +12,6 @@
 	<array>
 		<string>weixin</string>
 		<string>wechat</string>
-		<string>mqq</string>
-		<string>mqqopensdkapiV2</string>
-		<string>mqqOpensdkSSoLogin</string>
-		<string>mqqapi</string>
-		<string>weibosdk2.5</string>
-		<string>weibosdk</string>
-		<string>sinaweibo</string>
-		<string>sinaweibohd</string>
-		<string>alipay</string>
 		<string>cydia</string>
 		<string>safepay</string>
 	</array>
@@ -87,9 +78,7 @@
 			<key>CFBundleURLName</key>
 			<string>com.weibo</string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>wb3976348807</string>
-			</array>
+			<array/>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 		</dict>
@@ -113,7 +102,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.biyao.sszq</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>

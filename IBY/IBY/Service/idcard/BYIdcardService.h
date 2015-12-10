@@ -27,7 +27,6 @@
 @property (nonatomic, copy) NSString *code; // 身份证号
 @property (nonatomic, copy) NSString *identityUrl;  // 身份证照片url
 
-
 /**
  *  点击“上传”，向服务器上传图片
  *
@@ -52,6 +51,17 @@
                                        code:(NSString *)code
                                     identityUrl:(NSString *)identityUrl
                                       finsh:(void (^)(NSDictionary *data, BYError* error))finished;
+
+
+/**
+ *  加载页面时向服务器请求已经上传的身份信息
+ *
+ *  @param source   顺手赚钱:3 (分享有利项目:2)
+ *  @param finished 完成回调block
+ */
+- (void)getIdcardIfonWithSource:(NSNumber *)source
+                          finsh:(void (^)(NSDictionary *data, BYError* error))finished;
+
 
 
 

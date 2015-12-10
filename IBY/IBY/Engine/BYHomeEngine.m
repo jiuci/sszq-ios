@@ -22,7 +22,8 @@
         }
         BYHomeInfo * homeInfo = [BYHomeInfo homeWithDict:data];
         if (!homeInfo) {
-            BYError* error = [BYError errorWithDomain:@"com.biyao.fu" code:503 userInfo:nil];
+//            BYError* error = [BYError errorWithDomain:@"com.biyao.fu" code:503 userInfo:nil];
+            BYError* error = [BYError errorWithDomain:@"com.biyao.sszq" code:503 userInfo:nil];
             finished(nil,error);
             return;
         }

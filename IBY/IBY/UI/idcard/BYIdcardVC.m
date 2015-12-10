@@ -14,6 +14,7 @@
 #import "BYNextWebVC.h"
 
 #import "RegexKitLite.h"
+#import "UIImageView+WebCache.h"
 
 
 @interface BYIdcardVC ()
@@ -32,13 +33,15 @@
 
 @property (nonatomic, copy) NSString *identityUrl;
 
+@property (nonatomic, assign) BOOL isSelectedImage;
+
 @end
 
 static CGFloat bigTipsFontSize = 16;
 static CGFloat smallTipsFontSize = 12;
 static CGFloat leftSpace = 37;
 
-static CGFloat imgWidth = 750;
+static CGFloat imgWidth;
 static CGFloat imgHeight;
 
 
@@ -51,10 +54,14 @@ static CGFloat imgHeight;
     self.navigationController.navigationBarHidden = NO;
     _idcardService = [[BYIdcardService alloc] init];
     
+    [self getIdcardIfonFromServer];
+    
     [self setupLeftBackItem];
     [self setupUI];
+    
     [self setViewAction];
 }
+
 
 #pragma mark - UI
 - (void)setupUI {
@@ -135,9 +142,16 @@ static CGFloat imgHeight;
     CGFloat imgView_y = _uploadButton.bottom + 10;
     _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(leftSpace, imgView_y, textField_w, textField_w * 0.6)];
     _imgView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:0.5];
-    _imgView.contentMode = UIViewContentModeScaleAspectFill;
-    _imgView.clipsToBounds = YES;
-    _imgView.image = [UIImage imageNamed:@"img_idcard"];
+    _imgView.contentMode = UIViewContentModeScaleAspectFit;
+//    _imgView.contentMode = UIViewContentModeScaleAspectFill;
+//    _imgView.clipsToBounds = YES;
+    
+    if (_identityUrl.length > 0) {
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:_identityUrl] placeholderImage:[UIImage imageNamed:@"img_idcard"]];
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:_identityUrl]];
+    }else {
+        _imgView.image = [UIImage imageNamed:@"img_idcard"];
+    }
     [self.view addSubview:_imgView];
     
     
@@ -236,16 +250,18 @@ static CGFloat imgHeight;
 
 - (UIImage *)editedImage:(UIImage *)img {
     UIImage *lastImg;
-    if (img.size.width> imgWidth && img.size.height > imgWidth) {
-        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, imgWidth)];
-        return lastImg;
-    } else if(img.size.width > imgWidth){
-        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, img.size.height)];
-        return lastImg;
-    }else{
-        lastImg = [img image:img byScalingToSize:CGSizeMake(img.size.width, imgWidth)];
-        return lastImg;
-    }
+    lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, imgHeight)];
+    return lastImg;
+//    if (img.size.width> imgWidth && img.size.height > imgHeight) {
+//        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, imgHeight)];
+//        return lastImg;
+//    } else if(img.size.width > imgWidth){
+//        lastImg = [img image:img byScalingToSize:CGSizeMake(imgWidth, img.size.height)];
+//        return lastImg;
+//    }else{
+//        lastImg = [img image:img byScalingToSize:CGSizeMake(img.size.width, imgWidth)];
+//        return lastImg;
+//    }
 }
 
 
@@ -253,12 +269,20 @@ static CGFloat imgHeight;
 #pragma mark <UIImagePickerControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    [MBProgressHUD topShowTmpMessage:@"头像上传中"];
+    [MBProgressHUD topShowTmpMessage:@"图片上传中"];
     UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    imgHeight = imgWidth * 0.6;
-    if (img.size.width > imgWidth || img.size.height > imgHeight) {
+    // 长或宽均不能超过 450
+    if (img.size.width > 450 || img.size.height > 450) {
+        if (img.size.width > img.size.height) {
+            imgWidth = 450;
+            imgHeight = imgWidth * (img.size.height / img.size.width);
+        }else {
+            imgHeight = 450;
+            imgWidth = imgHeight * (img.size.width / img.size.height);
+        }
         img = [self editedImage:img];
     }else{
+        BYLog(@"width:%.2f ---- height:%.2f", img.size.width, img.size.height);
     }
     
     NSData *imgFile = UIImagePNGRepresentation(img);
@@ -270,9 +294,11 @@ static CGFloat imgHeight;
                 BYLog(@"%@", data);
 //                self.imgView.image = img;
 //                [self.imgView setImage:img];
+                
                 UIImage *myimg = [info objectForKey:UIImagePickerControllerOriginalImage];
 
-                [self.imgView setImage:myimg];
+                [_imgView setImage:myimg];
+                _isSelectedImage = YES;
                 _identityUrl = data[@"url"];
                 [MBProgressHUD topShowTmpMessage:@"身份证图片上传成功"];
             }else {
@@ -311,6 +337,48 @@ static CGFloat imgHeight;
 //        }];
 //    }];
 }
+
+#pragma mark - 向服务器请求已上传信息
+- (void)getIdcardIfonFromServer {
+    [MBProgressHUD topShowTmpMessage:@"正在加载服务器中的身份信息"];
+    [_idcardService getIdcardIfonWithSource:@(3)
+                                      finsh:^(NSDictionary *data, BYError *error) {
+                                          if ([data[@"code"] integerValue] == 1) {
+                                              BYLog(@"向服务器请求已上传信息成功--data:%@", data);
+                                              NSInteger resultCode = [[data[@"data"] objectForKey:@"resultCode"] integerValue];
+                                              if (resultCode == 1) {
+//                                                  [MBProgressHUD topHide];
+//                                                  [MBProgressHUD topShowTmpMessage:@"加载身份信息成功"];
+                                                  BYLog(@"加载服务器身份数据成功");
+                                                  _isSelectedImage = YES;
+                                                  NSDictionary *idcardDic = [data[@"data"] objectForKey:@"identity"];
+                                                  
+                                                  NSData *nsdataFromBase64String = [[NSData alloc] initWithBase64EncodedString:idcardDic[@"name"] options:0];
+                                                  NSString *base64Decoded = [[NSString alloc]
+                                                                             initWithData:nsdataFromBase64String encoding:NSUTF8StringEncoding];
+                                                  _nameTextField.text = base64Decoded;
+                                                  
+//                                                  _nameTextField.text = idcardDic[@"name"];
+                                                  _codeTextField.text = idcardDic[@"code"];
+                                                  _identityUrl = idcardDic[@"url"];
+                                                  _isSelectedImage = YES;
+                                                  [_imgView sd_setImageWithURL:[NSURL URLWithString:_identityUrl] placeholderImage:[UIImage imageNamed:@"img_idcard"]];
+                                              }else if (resultCode == 2) {
+//                                                  [MBProgressHUD topHide];
+//                                                  [MBProgressHUD topShowTmpMessage:@"不存在有效的身份证信息，请上传"];
+                                                  BYLog(@"desc:%@", [data[@"data"] objectForKey:@"desc"]);
+                                              }
+                                          }else {
+//                                              [MBProgressHUD topHide];
+//                                              [MBProgressHUD topShowTmpMessage:@"加载身份信息失败"];
+                                              BYLog(@"向服务器请求已上传信息失败--error:%@", error);
+                                          }
+                                      }];
+}
+/*
+ {"code":"1","data":{"resultCode":1,"identity":{"name":"yyc","code":"290498131","url":""}}}
+ */
+
 
 
 #pragma mark - 确定信息 以及 判断
@@ -396,7 +464,7 @@ static CGFloat imgHeight;
 }
 
 - (BOOL)idcardImgCorrect {
-    if (self.imgView.image == nil) {
+    if (self.imgView.image == nil || !_isSelectedImage) {
         [MBProgressHUD topShowTmpMessage:@"请选择身份证照片"];
         return NO;
     }
